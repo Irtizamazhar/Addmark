@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* Design tokens derived from the ADMARKPRO logo:
+   - Ink: the glossy navy-black of the "A" and arrow  (#0C161E)
+   - Brand: the cyan → deep teal gradient of the "DD" (#19D4F0 → #00B3CC → #01849E → #016179) */
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-jakarta), ui-sans-serif, sans-serif;
+
+  --color-ink-950: #060c11;
+  --color-ink-900: #0a1218;
+  --color-ink-800: #0f1b24;
+  --color-ink-700: #172733;
+  --color-ink-600: #243845;
+  --color-ink-500: #3d5361;
+  --color-ink-400: #637886;
+  --color-ink-300: #93a4af;
+  --color-ink-200: #c4cfd6;
+  --color-ink-100: #e4eaee;
+  --color-ink-50: #f4f7f9;
+
+  --color-brand-50: #e9fbfe;
+  --color-brand-100: #c8f3fa;
+  --color-brand-200: #93e6f4;
+  --color-brand-300: #52d5ec;
+  --color-brand-400: #19c4e2;
+  --color-brand-500: #00b3cc;
+  --color-brand-600: #01849e;
+  --color-brand-700: #016179;
+  --color-brand-800: #064b5d;
+  --color-brand-900: #0a3644;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 10s ease-in-out infinite;
+  --animate-spin-slow: spin 28s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* ── Fluid type scale (clamp) — one source of truth for heading sizes ── */
+@utility text-display {
+  font-size: clamp(2.25rem, 1.35rem + 3.9vw, 4.5rem);
+  line-height: 1.04;
+}
+@utility text-h1 {
+  font-size: clamp(2rem, 1.45rem + 2.6vw, 3.75rem);
+  line-height: 1.07;
+}
+@utility text-h2 {
+  font-size: clamp(1.75rem, 1.35rem + 1.75vw, 2.85rem);
+  line-height: 1.12;
+}
+@utility text-h3 {
+  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  line-height: 1.2;
+}
+@utility text-lead {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.7;
+}
+
+/* ── Spacing system — vertical rhythm for every section ── */
+@utility section-y {
+  padding-block: clamp(3.5rem, 2.6rem + 3.2vw, 6rem);
+}
+@utility section-y-sm {
+  padding-block: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-white font-sans text-ink-700 antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink-900;
+    letter-spacing: -0.02em;
+  }
+  ::selection {
+    background: var(--color-brand-400);
+    color: var(--color-ink-950);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .text-gradient {
+    background: linear-gradient(100deg, #5fe3f6 0%, #19c4e2 35%, #00b3cc 60%, #01849e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .text-gradient-deep {
+    background: linear-gradient(100deg, #00b3cc 0%, #01849e 55%, #016179 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, #19c4e2 0%, #00a3bf 45%, #016179 100%);
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .bg-grid-light {
+    background-image:
+      linear-gradient(to right, rgb(10 18 24 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(10 18 24 / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .mask-fade-b {
+    mask-image: linear-gradient(to bottom, black 40%, transparent);
+  }
+  .mask-radial {
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand-600;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
