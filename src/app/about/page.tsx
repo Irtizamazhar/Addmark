@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: `Learn about ${site.name}: ${site.companyIntro}`,
 };
 
-// Edit these statements to match ADMARKPRO's official mission and vision.
+// Edit these statements to match ADDMARKPRO's official mission and vision.
 const pillars = [
   { icon: Target, title: "Our Mission", text: "To help businesses grow online with effective digital solutions, and to equip learners with practical skills for the digital economy." },
   { icon: Eye, title: "Our Vision", text: "To be a trusted name for both digital services and digital education, where real-world expertise and learning go hand in hand." },
@@ -59,7 +59,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Two sides of ADMARKPRO */}
+      {/* Two sides of ADDMARKPRO */}
       <section className="section-y">
         <div className="container-x grid gap-6 lg:grid-cols-2">
           {[

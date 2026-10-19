@@ -1,6 +1,6 @@
 /**
  * ─────────────────────────────────────────────────────────────
- *  ADMARKPRO — SITE CONTENT
+ *  ADDMARKPRO — SITE CONTENT
  *  Every business detail on the website lives in this one file.
  *
  *  Values wrapped in [square brackets] are PLACEHOLDERS.
@@ -10,36 +10,42 @@
  */
 
 export const site = {
-  name: "ADMARKPRO",
-  instituteName: "ADMARKPRO Institute",
+  name: "ADDMARKPRO",
+  instituteName: "ADDMARKPRO Institute",
   tagline: "Digital Agency & Training Institute",
-  url: "https://www.admarkpro.com", // [replace with your live domain]
+  url: "https://www.addmarkpro.com", // [replace with your live domain]
 
   companyIntro:
-    "ADMARKPRO is a digital solutions company that helps businesses build a strong online presence, from websites and mobile apps to marketing that brings in real customers.",
+    "ADDMARKPRO is a digital solutions company that helps businesses build a strong online presence, from websites and mobile apps to marketing that brings in real customers.",
   instituteIntro:
-    "ADMARKPRO Institute turns the same skills we use on client work into hands-on, career-focused training for students and professionals.",
+    "ADDMARKPRO Institute turns the same skills we use on client work into hands-on, career-focused training for students and professionals.",
 
   contact: {
-    address: "Office #12, First Floor, Meer Tariq Arcade, Museum Road, Khanpur Road, Taxila, 47080, Pakistan",
+    address: "Office #12, First Floor, Meer Tariq Arcade, Museum Road, Khanpur Road, Taxila",
     // Set to a separate address if the institute campus is elsewhere, or leave "".
     instituteAddress: "",
     phones: ["+92 371 0908620", "+92 304 5357389"],
-    whatsapp: "", // digits with country code, e.g. "923001234567" — shows WhatsApp buttons when set
-    emails: ["[info@yourdomain.com]"],
+    // WhatsApp numbers (digits with country code). Contact-form messages open WhatsApp
+    // to the first number; the confirmation screen offers to send to the others too.
+    whatsapp: ["923710908620", "923045357389"],
+    emails: ["addmarkprocompany@gmail.com"],
     hours: "[Mon – Sat, 9:00 AM – 6:00 PM]",
     // Text used for the embedded Google Map. Leave "" until the real address is added.
     mapQuery: "Meer Tariq Arcade, Museum Road, Khanpur Road, Taxila 47080, Pakistan",
   },
 
+  // Paste profile URLs here, e.g. facebook: "https://www.facebook.com/yourpage".
   social: {
     facebook: "",
     instagram: "",
+    tiktok: "",
     linkedin: "",
     youtube: "",
-    tiktok: "",
     x: "",
   },
+  // These icons always show in the footer and contact panel; they become
+  // clickable links as soon as their URL above is filled in.
+  socialAlwaysShow: ["facebook", "instagram", "tiktok"] as const,
 };
 
 export type Social = keyof typeof site.social;
@@ -165,91 +171,6 @@ export const services: Service[] = [
     points: ["Landing pages & funnels", "Lead capture forms", "Lead qualification", "CRM-ready handoff"],
     image: "/images/svc-leads.webp",
     imageAlt: "Team meeting in a modern office around a whiteboard presentation",
-  },
-];
-
-/* ───────────────────────────── Courses ─────────────────────────────
- * Course names and descriptions are starter content — replace with your
- * real courses. Durations and fees are intentionally not shown.
- */
-
-export type Course = {
-  id: string;
-  title: string;
-  category: string;
-  short: string;
-  overview: string;
-  topics: string[];
-  image: string;
-  imageAlt: string;
-};
-
-export const courses: Course[] = [
-  {
-    id: "web-development",
-    title: "Web Development",
-    category: "Development",
-    short: "Learn to build modern, responsive websites and web apps from the ground up.",
-    overview:
-      "A practical path into web development, starting with the fundamentals and building up to complete, real-world websites.",
-    topics: ["HTML, CSS & responsive design", "JavaScript fundamentals", "Modern frameworks", "Building & deploying projects"],
-    image: "/images/course-web.webp",
-    imageAlt: "Close-up of colorful code on a dark editor screen",
-  },
-  {
-    id: "mobile-app-development",
-    title: "Mobile App Development",
-    category: "Development",
-    short: "Design and develop mobile applications for Android and iOS.",
-    overview:
-      "Learn how mobile apps are planned, designed and developed, and build your own working apps along the way.",
-    topics: ["Mobile UI principles", "App development basics", "Working with APIs", "Publishing apps"],
-    image: "/images/course-app.webp",
-    imageAlt: "Hand holding a smartphone showing app icons",
-  },
-  {
-    id: "digital-marketing",
-    title: "Digital Marketing",
-    category: "Marketing",
-    short: "Master the core channels businesses use to grow online.",
-    overview:
-      "A complete introduction to digital marketing: strategy, channels, content and measurement, taught through practical exercises.",
-    topics: ["Marketing fundamentals", "Content & email marketing", "Analytics & reporting", "Campaign planning"],
-    image: "/images/course-dm.webp",
-    imageAlt: "Desk with marketing books and a 'Marketing Strategy' note",
-  },
-  {
-    id: "seo",
-    title: "Search Engine Optimization",
-    category: "Marketing",
-    short: "Learn how to rank websites on Google with proven SEO techniques.",
-    overview:
-      "Understand how search engines work and learn the technical, on-page and content practices that improve rankings.",
-    topics: ["How search engines work", "Keyword research", "On-page & technical SEO", "Link building basics"],
-    image: "/images/svc-marketing.webp",
-    imageAlt: "Laptop with SEO and traffic analytics charts",
-  },
-  {
-    id: "social-media-marketing",
-    title: "Social Media Marketing",
-    category: "Marketing",
-    short: "Build and grow brands across today's leading social platforms.",
-    overview:
-      "Learn to plan content, grow audiences and manage brand presence across major social media platforms.",
-    topics: ["Platform strategy", "Content creation", "Community growth", "Insights & analytics"],
-    image: "/images/course-social.webp",
-    imageAlt: "Colorful 'Social Media' lettering on a light background",
-  },
-  {
-    id: "google-meta-ads",
-    title: "Google & Meta Ads",
-    category: "Advertising",
-    short: "Run paid campaigns on Google, Facebook and Instagram with confidence.",
-    overview:
-      "Hands-on training in planning, launching and optimizing paid campaigns on Google Ads and Meta Ads.",
-    topics: ["Campaign structure", "Audience & keyword targeting", "Ad creatives", "Budgeting & optimization"],
-    image: "/images/course-ads.webp",
-    imageAlt: "Person reviewing ad campaigns on a phone and laptop",
   },
 ];
 

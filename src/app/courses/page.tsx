@@ -1,42 +1,70 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import Link from "next/link";
 import PageHero from "@/components/PageHero";
-import CoursesGrid from "@/components/sections/CoursesGrid";
 import CtaBand from "@/components/sections/CtaBand";
 import Accordion from "@/components/Accordion";
+import CourseCatalog from "@/components/courses/CourseCatalog";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
+import { ButtonLink } from "@/components/ui/Button";
+import { categories } from "@/content/courses";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Courses",
-  description: `Explore practical digital skills courses at ${site.instituteName}.`,
+  description: `IT, AI, digital marketing, social media, YouTube, computer, design, freelancing and professional skills courses at ${site.instituteName}.`,
 };
 
 const faqs = [
-  { q: "How do I enroll in a course?", a: "Use the Enroll Now button on any course or fill in the contact form. Our team will get in touch to guide you through enrollment and upcoming batches." },
-  { q: "Are the classes practical?", a: "Yes. Our courses focus on hands-on learning, so you practise each concept with real tools as you learn." },
-  { q: "Where can I find course schedules and fees?", a: "Schedules and fees are shared on request. Contact us by phone, email or the contact form and we'll send you the latest details." },
-  { q: "Which course is right for me?", a: "Tell us about your goals and current experience through the contact form, and we'll help you choose the course that suits you best." },
+  { q: "How do I enroll in a course?", a: "Press Enroll Now on any course and send us your details on WhatsApp. Our team will reply with the next steps and upcoming batches." },
+  { q: "Are all of these courses running right now?", a: "This catalog shows the training we can offer. Which courses are currently running depends on demand and batches, so please contact us to confirm availability." },
+  { q: "Where can I find duration, schedules and fees?", a: "Course duration, schedules and fees are shared on request. Contact us by phone or WhatsApp and we'll send you the latest details." },
+  { q: "Are the classes practical?", a: "Yes. Our training focuses on hands-on learning, so you practise each concept with real tools as you learn." },
+  { q: "Which course is right for me?", a: "Tell us about your goals and current experience, and we'll help you choose a course that suits you." },
 ];
 
 export default function CoursesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Courses"
-        title={<>Courses that build <span className="text-gradient">job-ready skills</span></>}
-        description="Choose a course and start learning the practical digital skills businesses rely on."
-        image="/images/course-web.webp"
-        imageAlt="Code on a dark screen"
+        eyebrow={`${site.instituteName} · Courses`}
+        title={<>Training programs for the <span className="text-gradient">digital world</span></>}
+        description="From IT and AI to digital marketing, YouTube, design and everyday computer skills: find a course and start building practical skills."
+        image="/images/inst-class.webp"
+        imageAlt="Students attending a class in a modern classroom"
         crumbs={[{ label: "Courses" }]}
-      />
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <ButtonLink href="#catalog" size="lg" arrow>Browse Courses</ButtonLink>
+          <ButtonLink href="/contact?interest=enroll" size="lg" variant="ghost-light">Ask About a Course</ButtonLink>
+        </div>
+        <ul className="mt-8 flex max-w-3xl flex-wrap gap-2">
+          {categories.map((c) => (
+            <li key={c.id}>
+              <Link
+                href={`/courses?category=${c.id}#catalog`}
+                className="inline-block rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-semibold text-ink-200 backdrop-blur transition-colors hover:border-brand-400 hover:text-white sm:text-sm"
+              >
+                {c.short}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </PageHero>
 
-      <CoursesGrid showButton={false} />
+      <Suspense fallback={<div className="section-y container-x min-h-[60vh]" />}>
+        <CourseCatalog />
+      </Suspense>
 
       <section className="bg-ink-50 section-y">
         <div className="container-x grid gap-8 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
-            <SectionHeading eyebrow="FAQ" title={<>Questions about <span className="text-gradient-deep">enrollment?</span></>} description="Here are quick answers to common questions. Can't find yours? Just get in touch." />
+            <SectionHeading
+              eyebrow="FAQ"
+              title={<>Questions about <span className="text-gradient-deep">enrollment?</span></>}
+              description="Quick answers to common questions. Can't find yours? Just get in touch."
+            />
           </div>
           <Reveal delay={0.1} className="lg:col-span-8">
             <Accordion items={faqs} />

@@ -8,7 +8,7 @@ export default function AboutIntro({ showButton = true }: { showButton?: boolean
   return (
     <section className="relative overflow-hidden section-y">
       <div aria-hidden className="bg-grid-light mask-radial absolute inset-0 -z-10 opacity-70" />
-      <div className="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="container-x grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
         {/* Image collage */}
         <Reveal className="relative order-2 lg:order-1">
           <div className="relative grid grid-cols-12 gap-4">

@@ -1,11 +1,11 @@
-import { courses } from "@/content/site";
+import { featuredCourses } from "@/content/courses";
 import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
 import CourseCard from "../CourseCard";
 import { ButtonLink } from "../ui/Button";
 
 export default function CoursesGrid({ limit, showButton = true }: { limit?: number; showButton?: boolean }) {
-  const list = limit ? courses.slice(0, limit) : courses;
+  const list = limit ? featuredCourses.slice(0, limit) : featuredCourses;
   return (
     <section className="relative section-y">
       <div className="container-x">

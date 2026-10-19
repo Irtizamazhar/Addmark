@@ -3,7 +3,7 @@ import { WhatsAppIcon } from "./ui/icons";
 
 /** Only renders once a WhatsApp number is set in site.ts. */
 export default function FloatingWhatsApp() {
-  const n = site.contact.whatsapp.replace(/\D/g, "");
+  const n = (site.contact.whatsapp[0] ?? "").replace(/\D/g, "");
   if (!n) return null;
   return (
     <a

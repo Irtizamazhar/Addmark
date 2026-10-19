@@ -3,7 +3,7 @@ import { Compass, HeartHandshake, Layers, Lightbulb, ShieldCheck, Users } from "
 import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
 
-// Edit these to reflect ADMARKPRO's real strengths.
+// Edit these to reflect ADDMARKPRO's real strengths.
 const reasons = [
   { icon: Layers, title: "Agency + Institute", text: "We teach what we practise. Our training comes from real client work, and our client work benefits from a culture of learning." },
   { icon: Lightbulb, title: "Strategy Before Execution", text: "Every website, campaign and course starts with clear goals, so the work is purposeful from day one." },

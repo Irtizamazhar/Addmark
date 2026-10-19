@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
-import { courses, navLinks, services, site } from "@/content/site";
+import { navLinks, services, site } from "@/content/site";
+import { categories } from "@/content/courses";
 import Logo from "./ui/Logo";
 import SocialLinks from "./ui/SocialLinks";
 
@@ -35,8 +36,8 @@ export default function Footer() {
 
         <FooterCol title="Institute & Courses" className="col-span-2 sm:col-span-1 lg:col-span-2">
           <FooterLink href="/institute">About the Institute</FooterLink>
-          {courses.slice(0, 5).map((c) => (
-            <FooterLink key={c.id} href={`/courses/${c.id}`}>{c.title}</FooterLink>
+          {categories.slice(0, 6).map((c) => (
+            <FooterLink key={c.id} href={`/courses?category=${c.id}`}>{c.short}</FooterLink>
           ))}
         </FooterCol>
 

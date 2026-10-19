@@ -9,7 +9,7 @@ import { WhatsAppIcon } from "../ui/icons";
 
 export default function ContactSection({ showMap = false }: { showMap?: boolean }) {
   const { contact } = site;
-  const wa = contact.whatsapp.replace(/\D/g, "");
+  const wa = contact.whatsapp.map((n) => n.replace(/\D/g, "")).filter(Boolean);
 
   return (
     <section id="contact" className="relative overflow-hidden bg-ink-50 section-y">
@@ -43,11 +43,13 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
                     <a key={p} href={`tel:${p.replace(/[^\d+]/g, "")}`} className="block hover:text-brand-300">{p}</a>
                   ))}
                 </InfoRow>
-                {wa && (
+                {wa.length > 0 && (
                   <InfoRow icon={<WhatsAppIcon className="size-5" />} label="WhatsApp">
-                    <a href={`https://wa.me/${wa}`} target="_blank" rel="noopener noreferrer" className="hover:text-brand-300">
-                      Chat with us on WhatsApp
-                    </a>
+                    {wa.map((n) => (
+                      <a key={n} href={`https://wa.me/${n}`} target="_blank" rel="noopener noreferrer" className="block hover:text-brand-300">
+                        +{n.slice(0, 2)} {n.slice(2, 5)} {n.slice(5)}
+                      </a>
+                    ))}
                   </InfoRow>
                 )}
                 <InfoRow icon={<Mail className="size-5" />} label="Email">

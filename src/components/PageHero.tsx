@@ -20,7 +20,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function PageHero({ eyebrow, title, description, image, imageAlt, crumbs = [], children }: Props) {
   return (
-    <section className="relative isolate overflow-hidden bg-ink-950 pb-14 pt-28 sm:pb-16 sm:pt-32 lg:pb-20 lg:pt-40">
+    <section className="relative isolate overflow-hidden bg-ink-950 pb-12 pt-24 sm:pb-14 sm:pt-28 lg:pb-16 lg:pt-32">
       <motion.div
         initial={{ scale: 1.1, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -57,7 +57,7 @@ export default function PageHero({ eyebrow, title, description, image, imageAlt,
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease }}
-          className="eyebrow mt-6 text-brand-300"
+          className="eyebrow mt-4 text-brand-300"
         >
           <span className="h-px w-8 bg-current opacity-60" />
           {eyebrow}
