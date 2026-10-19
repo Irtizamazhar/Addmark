@@ -77,7 +77,7 @@ export default async function CoursePage({ params }: Params) {
 
       <section className="section-y">
         <div className="container-x grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="min-w-0 space-y-10 lg:col-span-7">
+          <div className="min-w-0 max-w-3xl space-y-10 lg:col-span-7">
             <Reveal>
               <h2 className="text-h2 font-bold">Course overview</h2>
               <p className="mt-4 text-lead text-ink-500">{course.short} {category.description}</p>
@@ -104,7 +104,7 @@ export default async function CoursePage({ params }: Params) {
             <Reveal delay={0.1}>
               <div className="flex gap-3 rounded-2xl border border-brand-100 bg-brand-50/60 p-5 text-sm leading-relaxed text-ink-700">
                 <Info className="mt-0.5 size-5 shrink-0 text-brand-600" />
-                <p>
+                <p className="max-w-2xl">
                   The detailed course outline, prerequisites, schedule and fees are shared when you enquire. Course availability depends
                   on upcoming batches, so contact us to confirm.
                   {course.category === "youtube" && (
@@ -159,7 +159,7 @@ export default async function CoursePage({ params }: Params) {
           <div className="mx-auto max-w-3xl rounded-[2rem] border border-ink-100 bg-white p-6 shadow-[0_30px_60px_-40px_rgba(10,18,24,0.4)] sm:p-10">
             <span className="eyebrow"><span className="h-px w-8 bg-current opacity-60" />Enrollment</span>
             <h2 className="mt-3 text-h3 font-bold">Enroll in {course.title}</h2>
-            <p className="mb-7 mt-2 text-sm text-ink-500">
+            <p className="mb-7 mt-2 max-w-xl text-sm text-ink-500">
               Fill in your details and send them to us on WhatsApp. Our team will reply with availability, schedule and fees.
             </p>
             <Suspense fallback={<div className="min-h-[24rem]" />}>

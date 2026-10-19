@@ -48,14 +48,14 @@ export default function Footer() {
           </li>
           {contact.phones.map((p) => (
             <li key={p}>
-              <a href={`tel:${p.replace(/[^\d+]/g, "")}`} className="flex gap-3 text-sm hover:text-white">
+              <a href={`tel:${p.replace(/[^\d+]/g, "")}`} className="flex gap-3 py-1 text-sm hover:text-white">
                 <Phone className="mt-0.5 size-4 shrink-0 text-brand-400" /> {p}
               </a>
             </li>
           ))}
           {contact.emails.map((e) => (
             <li key={e}>
-              <a href={`mailto:${e.replace(/[[\]]/g, "")}`} className="flex gap-3 break-words text-sm hover:text-white">
+              <a href={`mailto:${e.replace(/[[\]]/g, "")}`} className="flex gap-3 break-words py-1 text-sm hover:text-white">
                 <Mail className="mt-0.5 size-4 shrink-0 text-brand-400" /> {e}
               </a>
             </li>
@@ -78,7 +78,7 @@ function FooterCol({ title, children, className = "" }: { title: string; childre
   return (
     <div className={className}>
       <h2 className="font-display text-sm font-semibold uppercase tracking-[0.15em] text-white">{title}</h2>
-      <ul className="mt-4 space-y-2.5">{children}</ul>
+      <ul className="mt-3 space-y-1">{children}</ul>
     </div>
   );
 }
@@ -86,7 +86,7 @@ function FooterCol({ title, children, className = "" }: { title: string; childre
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link href={href} className="group inline-flex items-center text-sm transition-colors hover:text-white">
+      <Link href={href} className="group inline-flex min-h-7 items-center py-1 text-sm transition-colors hover:text-white">
         <span className="h-px w-0 bg-brand-400 transition-all duration-300 group-hover:mr-2 group-hover:w-3" />
         {children}
       </Link>

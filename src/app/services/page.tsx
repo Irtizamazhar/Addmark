@@ -59,7 +59,7 @@ export default function ServicesPage() {
                 <Reveal delay={0.1}>
                   <span className="font-display text-sm font-bold text-brand-500">{String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}</span>
                   <h2 className="mt-3 text-h2 font-bold">{s.title}</h2>
-                  <p className="mt-4 text-lead text-ink-500">{s.description}</p>
+                  <p className="mt-4 max-w-2xl text-lead text-ink-500">{s.description}</p>
                   <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                     {s.points.map((p) => (
                       <li key={p} className="flex items-start gap-2.5 rounded-xl border border-ink-100 bg-ink-50/60 px-4 py-3 text-sm font-medium text-ink-700">

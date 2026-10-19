@@ -49,7 +49,7 @@ export default function InstitutePage() {
               eyebrow="Our Approach"
               title={<>Education built on <span className="text-gradient-deep">real-world practice</span></>}
             />
-            <div className="mt-4 space-y-4 text-lead text-ink-500">
+            <div className="mt-4 max-w-2xl space-y-4 text-lead text-ink-500">
               <p>
                 At {site.instituteName}, learning is hands-on. Our training draws on the same skills and tools that our company team uses on
                 client projects in development and digital marketing.

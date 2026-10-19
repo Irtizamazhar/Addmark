@@ -210,7 +210,7 @@ export default function CourseCatalog() {
                         setCategory(cat.id);
                         document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth" });
                       }}
-                      className="group inline-flex shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-700 hover:text-brand-600 sm:self-auto"
+                      className="group inline-flex min-h-10 shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-700 hover:text-brand-600 sm:self-auto"
                     >
                       View all {list.length} courses
                       <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

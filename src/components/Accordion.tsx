@@ -37,7 +37,7 @@ export default function Accordion({ items }: { items: { q: string; a: string }[]
                   transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="px-6 pb-6 text-sm leading-relaxed text-ink-500 sm:px-8 sm:text-base">{it.a}</p>
+                  <p className="max-w-3xl px-6 pb-6 text-sm leading-relaxed text-ink-500 sm:px-8 sm:text-base">{it.a}</p>
                 </motion.div>
               )}
             </AnimatePresence>

@@ -29,9 +29,9 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
               <div aria-hidden className="absolute -right-20 -top-20 -z-10 size-64 rounded-full bg-brand-500/30 blur-3xl" />
               <div aria-hidden className="bg-grid absolute inset-0 -z-10 opacity-50" />
               <h3 className="text-2xl font-bold text-white">Get in touch</h3>
-              <p className="mt-2 text-sm text-ink-300">We&apos;d love to hear from you. Choose whatever works best for you.</p>
+              <p className="mt-2 max-w-md text-sm text-ink-300">We&apos;d love to hear from you. Choose whatever works best for you.</p>
 
-              <ul className="mt-7 space-y-5">
+              <ul className="mt-7 grid gap-5 md:grid-cols-2 md:gap-x-8 lg:grid-cols-1">
                 <InfoRow icon={<MapPin className="size-5" />} label={contact.instituteAddress ? "Company Office" : "Address"}>
                   {contact.address}
                 </InfoRow>
@@ -40,13 +40,13 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
                 )}
                 <InfoRow icon={<Phone className="size-5" />} label="Phone">
                   {contact.phones.map((p) => (
-                    <a key={p} href={`tel:${p.replace(/[^\d+]/g, "")}`} className="block hover:text-brand-300">{p}</a>
+                    <a key={p} href={`tel:${p.replace(/[^\d+]/g, "")}`} className="block py-1 hover:text-brand-300">{p}</a>
                   ))}
                 </InfoRow>
                 {wa.length > 0 && (
                   <InfoRow icon={<WhatsAppIcon className="size-5" />} label="WhatsApp">
                     {wa.map((n) => (
-                      <a key={n} href={`https://wa.me/${n}`} target="_blank" rel="noopener noreferrer" className="block hover:text-brand-300">
+                      <a key={n} href={`https://wa.me/${n}`} target="_blank" rel="noopener noreferrer" className="block py-1 hover:text-brand-300">
                         +{n.slice(0, 2)} {n.slice(2, 5)} {n.slice(5)}
                       </a>
                     ))}
@@ -54,7 +54,7 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
                 )}
                 <InfoRow icon={<Mail className="size-5" />} label="Email">
                   {contact.emails.map((e) => (
-                    <a key={e} href={`mailto:${e.replace(/[[\]]/g, "")}`} className="block break-all hover:text-brand-300">{e}</a>
+                    <a key={e} href={`mailto:${e.replace(/[[\]]/g, "")}`} className="block break-all py-1 hover:text-brand-300">{e}</a>
                   ))}
                 </InfoRow>
                 <InfoRow icon={<Clock className="size-5" />} label="Working Hours">{contact.hours}</InfoRow>
@@ -73,7 +73,7 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
           <Reveal delay={0.1} className="lg:col-span-7">
             <div className="h-full rounded-[2rem] border border-ink-100 bg-white p-7 shadow-[0_30px_60px_-40px_rgba(10,18,24,0.4)] sm:p-10">
               <h3 className="text-2xl font-bold">Send us a message</h3>
-              <p className="mb-6 mt-2 text-sm text-ink-500">Fill in the form and we&apos;ll respond as soon as we can.</p>
+              <p className="mb-6 mt-2 max-w-xl text-sm text-ink-500">Fill in the form and we&apos;ll respond as soon as we can.</p>
               <Suspense fallback={<div className="min-h-[24rem]" />}>
                 <ContactForm />
               </Suspense>

@@ -52,7 +52,7 @@ export default function AboutIntro({ showButton = true }: { showButton?: boolean
             <h2 className="mt-3 text-h2 font-bold">
               A digital company and a <span className="text-gradient-deep">learning institute</span>, under one roof.
             </h2>
-            <p className="mt-4 text-lead text-ink-500">
+            <p className="mt-4 max-w-2xl text-lead text-ink-500">
               {site.companyIntro}
             </p>
           </Reveal>

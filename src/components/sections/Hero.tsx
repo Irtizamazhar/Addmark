@@ -25,10 +25,16 @@ export default function Hero() {
     <section ref={ref} className="relative isolate overflow-hidden bg-ink-950 pb-16 pt-28 sm:pb-20 sm:pt-32 lg:flex lg:min-h-[min(100svh,54rem)] lg:items-center lg:pb-20 lg:pt-32">
       {/* Background layers */}
       <div aria-hidden className="bg-grid mask-radial absolute inset-0 -z-10" />
-      <motion.div style={{ y: glowY }} aria-hidden className="absolute -right-40 top-10 -z-10 size-[38rem] rounded-full bg-brand-500/25 blur-[120px]" />
-      <div aria-hidden className="absolute -left-40 bottom-0 -z-10 size-[30rem] rounded-full bg-brand-700/30 blur-[120px]" />
+      {/* Glows and the swoosh are anchored to the content container, not the screen edges,
+          so they stay next to the content on wide and ultrawide displays. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="container-x relative h-full">
+          <motion.div style={{ y: glowY }} className="absolute -right-48 top-10 size-[38rem] rounded-full bg-brand-500/25 blur-[120px]" />
+          <div className="absolute -left-56 bottom-0 size-[30rem] rounded-full bg-brand-700/30 blur-[120px]" />
+          <Swoosh className="absolute -right-[6%] bottom-0 hidden w-[52%] max-w-3xl opacity-35 lg:block" />
+        </div>
+      </div>
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-ink-950 to-transparent" />
-      <Swoosh className="pointer-events-none absolute -right-[4%] bottom-0 -z-10 hidden w-[48%] max-w-3xl opacity-35 lg:block" />
 
       <div className="container-x grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-10 xl:gap-16">
         {/* Copy */}

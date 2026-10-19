@@ -32,8 +32,13 @@ export default function PageHero({ eyebrow, title, description, image, imageAlt,
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950 via-ink-950/85 to-ink-950/40" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-ink-950 to-transparent" />
       <div aria-hidden className="bg-grid mask-radial absolute inset-0 -z-10 opacity-60" />
-      <div aria-hidden className="absolute -right-32 top-0 -z-10 size-[28rem] rounded-full bg-brand-500/25 blur-[110px]" />
-      <Swoosh className="pointer-events-none absolute -right-10 bottom-0 -z-10 hidden w-[45%] max-w-2xl opacity-50 md:block" delay={0.6} />
+      {/* Anchored to the content container so the decoration stays near the text on wide screens */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="container-x relative h-full">
+          <div className="absolute -right-40 top-0 size-[28rem] rounded-full bg-brand-500/25 blur-[110px]" />
+          <Swoosh className="absolute -right-[4%] bottom-0 hidden w-[45%] max-w-2xl opacity-50 md:block" delay={0.6} />
+        </div>
+      </div>
 
       <div className="container-x">
         <motion.nav
@@ -43,11 +48,11 @@ export default function PageHero({ eyebrow, title, description, image, imageAlt,
           transition={{ duration: 0.6, ease }}
         >
           <ol className="flex flex-wrap items-center gap-1.5 text-sm text-ink-300">
-            <li><Link href="/" className="hover:text-white">Home</Link></li>
+            <li><Link href="/" className="inline-flex min-h-7 items-center hover:text-white">Home</Link></li>
             {crumbs.map((c) => (
               <li key={c.label} className="flex items-center gap-1.5">
                 <ChevronRight className="size-3.5" />
-                {c.href ? <Link href={c.href} className="hover:text-white">{c.label}</Link> : <span className="text-brand-300">{c.label}</span>}
+                {c.href ? <Link href={c.href} className="inline-flex min-h-7 items-center hover:text-white">{c.label}</Link> : <span className="text-brand-300">{c.label}</span>}
               </li>
             ))}
           </ol>
