@@ -2,13 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { ArrowRight, LayoutGrid, RotateCcw, Search, SearchX, X } from "lucide-react";
+import { LayoutGrid, RotateCcw, Search, SearchX, X } from "lucide-react";
 import { categories, courses, type CategoryId } from "@/content/courses";
 import CourseCard from "../CourseCard";
 import { categoryIcons } from "./categoryIcons";
 
 const PAGE = 12;
-const PER_GROUP = 6; // cards per category in the grouped "All" view (3 on mobile)
 
 const normalize = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[^a-z0-9+#.]+/g, " ").trim();
 
@@ -76,7 +75,7 @@ export default function CourseCatalog() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search courses, e.g. Excel, React, YouTube SEO"
+                placeholder="Search courses, e.g. SEO, Google Ads, Video Editing"
                 className="h-12 w-full rounded-full border border-ink-100 bg-ink-50/60 pl-12 pr-11 text-sm text-ink-900 placeholder:text-ink-300 focus:border-brand-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-100 [&::-webkit-search-cancel-button]:hidden"
               />
               {query && (
@@ -168,7 +167,7 @@ export default function CourseCatalog() {
               <RotateCcw className="size-4" /> Clear filters
             </button>
           </div>
-        ) : filtered ? (
+        ) : (
           <>
             <Grid>
               {results.slice(0, limit).map((c) => (
@@ -187,46 +186,6 @@ export default function CourseCatalog() {
               </div>
             )}
           </>
-        ) : (
-          <div className="mt-6 space-y-14 lg:space-y-16">
-            {categories.map((cat) => {
-              const list = courses.filter((c) => c.category === cat.id);
-              const Icon = categoryIcons[cat.id];
-              return (
-                <div key={cat.id} id={`cat-${cat.id}`} className="scroll-mt-24">
-                  <div className="flex flex-col gap-4 border-b border-ink-100 pb-5 sm:flex-row sm:items-end sm:justify-between">
-                    <div className="flex min-w-0 gap-4">
-                      <span className="bg-brand-gradient grid size-12 shrink-0 place-items-center rounded-2xl text-white shadow-[0_10px_25px_-10px_rgba(0,179,204,0.7)]">
-                        <Icon className="size-6" />
-                      </span>
-                      <div className="min-w-0">
-                        <h2 className="text-h3 font-bold">{cat.title}</h2>
-                        <p className="mt-1 max-w-2xl text-sm text-ink-500 sm:text-base">{cat.description}</p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setCategory(cat.id);
-                        document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth" });
-                      }}
-                      className="group inline-flex min-h-10 shrink-0 items-center gap-1.5 self-start text-sm font-semibold text-brand-700 hover:text-brand-600 sm:self-auto"
-                    >
-                      View all {list.length} courses
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-                    </button>
-                  </div>
-                  <Grid>
-                    {list.slice(0, PER_GROUP).map((c, i) => (
-                      <li key={c.id} className={i >= 3 ? "max-sm:hidden" : ""}>
-                        <CourseCard course={c} />
-                      </li>
-                    ))}
-                  </Grid>
-                </div>
-              );
-            })}
-          </div>
         )}
       </div>
     </section>

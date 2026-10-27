@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Clock, Signal } from "lucide-react";
-import { getCategory, type Course } from "@/content/courses";
+import { discountPercent, formatFee, getCategory, type Course } from "@/content/courses";
 import { ButtonLink } from "./ui/Button";
 
 export default function CourseCard({ course }: { course: Course }) {
@@ -20,9 +20,7 @@ export default function CourseCard({ course }: { course: Course }) {
         <span className="absolute left-3 top-3 max-w-[calc(100%-1.5rem)] truncate rounded-full bg-white/95 px-2.5 py-1 text-xs font-semibold text-brand-700 backdrop-blur">
           {category.short}
         </span>
-        {course.availability === "open" && (
-          <span className="absolute right-3 top-3 rounded-full bg-brand-500 px-2.5 py-1 text-xs font-semibold text-white">Enrolling now</span>
-        )}
+        <span className="absolute right-3 top-3 rounded-full bg-red-500 px-2.5 py-1 text-xs font-bold text-white">{discountPercent(course)}% OFF</span>
       </Link>
 
       <div className="flex min-w-0 flex-1 flex-col p-5">
@@ -32,6 +30,11 @@ export default function CourseCard({ course }: { course: Course }) {
           </Link>
         </h3>
         <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-ink-500">{course.short}</p>
+
+        <p className="mt-3 flex flex-wrap items-baseline gap-x-2">
+          <span className="text-xl font-bold text-ink-900">{formatFee(course.fee)}</span>
+          <s className="text-sm text-ink-400">{formatFee(course.originalFee)}</s>
+        </p>
 
         {(course.duration || course.level) && (
           <ul className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-ink-600">

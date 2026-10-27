@@ -13,13 +13,13 @@ import { site } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Courses",
-  description: `IT, AI, digital marketing, social media, YouTube, computer, design, freelancing and professional skills courses at ${site.instituteName}.`,
+  description: `Web development, digital marketing, SEO, Google Ads, Meta Ads, YouTube automation, video editing, content creation and animation courses at ${site.instituteName}.`,
 };
 
 const faqs = [
   { q: "How do I enroll in a course?", a: "Press Enroll Now on any course and send us your details on WhatsApp. Our team will reply with the next steps and upcoming batches." },
-  { q: "Are all of these courses running right now?", a: "This catalog shows the training we can offer. Which courses are currently running depends on demand and batches, so please contact us to confirm availability." },
-  { q: "Where can I find duration, schedules and fees?", a: "Course duration, schedules and fees are shared on request. Contact us by phone or WhatsApp and we'll send you the latest details." },
+  { q: "What are the course fees?", a: "Each course shows its fee on its card and course page. All courses currently have a 30% discount, and the discounted fee is what you pay." },
+  { q: "When do classes start?", a: "Admissions are open. Class timings and upcoming batch dates are shared when you enquire, so contact us by phone or WhatsApp to reserve your seat." },
   { q: "Are the classes practical?", a: "Yes. Our training focuses on hands-on learning, so you practise each concept with real tools as you learn." },
   { q: "Which course is right for me?", a: "Tell us about your goals and current experience, and we'll help you choose a course that suits you." },
 ];
@@ -30,7 +30,7 @@ export default function CoursesPage() {
       <PageHero
         eyebrow={`${site.instituteName} · Courses`}
         title={<>Training programs for the <span className="text-gradient">digital world</span></>}
-        description="From IT and AI to digital marketing, YouTube, design and everyday computer skills: find a course and start building practical skills."
+        description="From web development and digital marketing to YouTube, video editing and animation: practical, career-focused courses, now with 30% off."
         image="/images/inst-class.webp"
         imageAlt="Students attending a class in a modern classroom"
         crumbs={[{ label: "Courses" }]}

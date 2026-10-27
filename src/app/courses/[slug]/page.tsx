@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { CalendarClock, CheckCircle2, Info, Layers, MonitorPlay, Signal, Users } from "lucide-react";
+import { BadgePercent, CalendarClock, CheckCircle2, Info, Layers, MonitorPlay, Signal, Users, Wallet } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CourseCard from "@/components/CourseCard";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/ui/Reveal";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
-import { courses, getCategory } from "@/content/courses";
+import { courses, discountPercent, formatFee, getCategory } from "@/content/courses";
 import { site } from "@/content/site";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -35,16 +35,19 @@ export default async function CoursePage({ params }: Params) {
   const course = courses.find((c) => c.id === slug);
   if (!course) notFound();
   const category = getCategory(course.category);
-  const related = courses.filter((c) => c.category === course.category && c.id !== course.id).slice(0, 3);
+  const sameCategory = courses.filter((c) => c.category === course.category && c.id !== course.id);
+  const related = [...sameCategory, ...courses.filter((c) => c.category !== course.category)].slice(0, 3);
   const wa = site.contact.whatsapp[0];
   const waText = encodeURIComponent(`Assalam o Alaikum ${site.name}, I'd like to know more about the "${course.title}" course.`);
 
   const details = [
     { icon: Layers, label: "Category", value: category.title },
-    { icon: CalendarClock, label: "Duration", value: course.duration ?? "Shared on request" },
-    { icon: Signal, label: "Level", value: course.level ?? "Shared on request" },
-    { icon: MonitorPlay, label: "Format", value: course.format ?? "Shared on request" },
-  ];
+    { icon: Wallet, label: "Regular fee", value: formatFee(course.originalFee) },
+    { icon: BadgePercent, label: "Discount", value: `${discountPercent(course)}% OFF` },
+    { icon: CalendarClock, label: "Duration", value: course.duration },
+    { icon: Signal, label: "Level", value: course.level },
+    { icon: MonitorPlay, label: "Format", value: course.format },
+  ].filter((d): d is typeof d & { value: string } => Boolean(d.value));
 
   return (
     <>
@@ -80,14 +83,25 @@ export default async function CoursePage({ params }: Params) {
           <div className="min-w-0 max-w-3xl space-y-10 lg:col-span-7">
             <Reveal>
               <h2 className="text-h2 font-bold">Course overview</h2>
-              <p className="mt-4 text-lead text-ink-500">{course.short} {category.description}</p>
+              <p className="mt-4 text-lead text-ink-500">{course.overview}</p>
+            </Reveal>
+
+            <Reveal delay={0.05}>
+              <h3 className="text-xl font-bold">What you&apos;ll learn</h3>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                {course.learn.map((t) => (
+                  <li key={t} className="flex items-start gap-2.5 text-ink-700">
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-500" /> {t}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
 
             <Reveal delay={0.05}>
               <h3 className="flex items-center gap-2.5 text-xl font-bold">
                 <Users className="size-5 text-brand-500" /> Who this course is for
               </h3>
-              <p className="mt-3 text-ink-500">{category.audience}</p>
+              <p className="mt-3 text-ink-500">{course.audience}</p>
             </Reveal>
 
             <Reveal delay={0.1}>
@@ -105,8 +119,8 @@ export default async function CoursePage({ params }: Params) {
               <div className="flex gap-3 rounded-2xl border border-brand-100 bg-brand-50/60 p-5 text-sm leading-relaxed text-ink-700">
                 <Info className="mt-0.5 size-5 shrink-0 text-brand-600" />
                 <p className="max-w-2xl">
-                  The detailed course outline, prerequisites, schedule and fees are shared when you enquire. Course availability depends
-                  on upcoming batches, so contact us to confirm.
+                  The discounted fee is a limited-time offer. Class timings and upcoming batch dates are shared when you enquire, so
+                  contact us to reserve your seat.
                   {course.category === "youtube" && (
                     <>
                       {" "}This course teaches YouTube as a content production and workflow skill, including originality, copyright
@@ -128,7 +142,17 @@ export default async function CoursePage({ params }: Params) {
                       course.availability === "open" ? "bg-brand-500 text-white" : "bg-white/95 text-ink-700"
                     }`}
                   >
-                    {course.availability === "open" ? "Enrolling now" : "Availability on request"}
+                    {course.availability === "open" ? "Admission open" : "Availability on request"}
+                  </span>
+                  <span className="absolute right-4 top-4 rounded-full bg-red-500 px-3 py-1 text-xs font-bold text-white">
+                    {discountPercent(course)}% OFF
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-ink-100 px-6 py-5">
+                  <span className="text-3xl font-bold text-ink-900">{formatFee(course.fee)}</span>
+                  <s className="text-base text-ink-400">{formatFee(course.originalFee)}</s>
+                  <span className="w-full text-sm font-semibold text-red-600">
+                    You save {formatFee(course.originalFee - course.fee)}
                   </span>
                 </div>
                 <dl className="divide-y divide-ink-100 px-6">
@@ -160,7 +184,7 @@ export default async function CoursePage({ params }: Params) {
             <span className="eyebrow"><span className="h-px w-8 bg-current opacity-60" />Enrollment</span>
             <h2 className="mt-3 text-h3 font-bold">Enroll in {course.title}</h2>
             <p className="mb-7 mt-2 max-w-xl text-sm text-ink-500">
-              Fill in your details and send them to us on WhatsApp. Our team will reply with availability, schedule and fees.
+              Fill in your details and send them to us on WhatsApp. Our team will reply with class timings and the next batch date.
             </p>
             <Suspense fallback={<div className="min-h-[24rem]" />}>
               <ContactForm defaultInterest={`course-${course.id}`} />
@@ -173,8 +197,8 @@ export default async function CoursePage({ params }: Params) {
         <section className="section-y-sm">
           <div className="container-x">
             <div className="flex flex-wrap items-end justify-between gap-4">
-              <h2 className="text-h3 font-bold">More in {category.title}</h2>
-              <ButtonLink href={`/courses?category=${category.id}#catalog`} variant="outline" arrow>View all</ButtonLink>
+              <h2 className="text-h3 font-bold">More courses</h2>
+              <ButtonLink href="/courses#catalog" variant="outline" arrow>View all</ButtonLink>
             </div>
             <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((c, i) => (

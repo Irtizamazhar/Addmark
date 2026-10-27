@@ -2,27 +2,16 @@
  * ─────────────────────────────────────────────────────────────
  *  ADDMARKPRO INSTITUTE — COURSE CATALOG
  *
- *  This list describes the courses the institute CAN offer. It does not
- *  confirm that every course is currently running.
+ *  These are the courses currently offered, with their confirmed fees.
+ *  `fee` is the discounted fee students pay; `originalFee` is the regular
+ *  fee shown crossed out. Amounts are in PKR.
  *
- *  To confirm details for a course, add them in `confirmed` below, e.g.
- *    "web-development": { duration: "3 months", level: "Beginner",
- *                         format: "On-campus", availability: "open" },
- *  Anything left unset is shown as "Available on request" on the site.
- *  Never add prices, schedules or certificates that aren't confirmed.
+ *  To add duration, level or format for a course, set them on its entry, e.g.
+ *    duration: "3 months", level: "Beginner", format: "On-campus"
  * ─────────────────────────────────────────────────────────────
  */
 
-export type CategoryId =
-  | "it-software"
-  | "ai-automation"
-  | "digital-marketing"
-  | "social-media"
-  | "youtube"
-  | "computer"
-  | "design-video"
-  | "freelancing"
-  | "office-business";
+export type CategoryId = "it-software" | "digital-marketing" | "social-media" | "youtube" | "design-video";
 
 export type Category = {
   id: CategoryId;
@@ -36,10 +25,18 @@ export type Course = {
   id: string;
   title: string;
   category: CategoryId;
+  /** One-line summary for cards. */
   short: string;
+  /** Full description for the course page. */
+  overview: string;
+  /** What students will learn. */
+  learn: string[];
+  /** Who the course is for. */
+  audience: string;
+  fee: number;
+  originalFee: number;
   image: string;
   imageAlt: string;
-  /** Only set when confirmed by the institute. */
   duration?: string;
   level?: string;
   format?: string;
@@ -53,472 +50,256 @@ export const categories: Category[] = [
     id: "it-software",
     title: "IT & Software Development",
     short: "IT & Development",
-    description: "Programming, web and app development, databases and the core technology skills behind modern software.",
-    audience: "Students and career-switchers who want to build websites, apps and software, or strengthen their technical foundations.",
-  },
-  {
-    id: "ai-automation",
-    title: "AI, Generative AI & Automation",
-    short: "AI & Automation",
-    description: "Practical, responsible use of AI tools, chatbots, agents and automation to work smarter.",
-    audience: "Professionals, freelancers, creators and business owners who want to use AI tools effectively and responsibly.",
+    description: "Programming, web development and the core technology skills behind modern software.",
+    audience: "Students and career-switchers who want to build websites, applications and software.",
   },
   {
     id: "digital-marketing",
     title: "Digital Marketing",
     short: "Digital Marketing",
-    description: "SEO, paid advertising, analytics, content and strategy for growing brands online.",
+    description: "SEO, paid advertising, analytics and strategy for growing brands online.",
     audience: "Aspiring marketers, business owners and freelancers who want to attract customers online.",
   },
   {
     id: "social-media",
-    title: "Social Media Marketing",
+    title: "Social Media & Content Creation",
     short: "Social Media",
-    description: "Content, strategy, community and analytics across today's leading social platforms.",
-    audience: "Aspiring social media managers, content creators and businesses building their online presence.",
+    description: "Short-form video, content strategy and platform growth across today's leading social platforms.",
+    audience: "Aspiring content creators, social media managers and businesses building their online presence.",
   },
   {
     id: "youtube",
-    title: "YouTube Automation & Content Creation",
+    title: "YouTube Automation",
     short: "YouTube",
     description:
-      "Plan, produce and manage YouTube content with efficient workflows, while respecting originality, copyright and YouTube's policies.",
+      "Plan, produce and grow YouTube channels with efficient, AI-assisted workflows, while respecting originality, copyright and YouTube's policies.",
     audience: "Creators, editors and freelancers who want to build a structured, policy-compliant YouTube workflow.",
   },
   {
-    id: "computer",
-    title: "Computer Short Courses",
-    short: "Computer Courses",
-    description: "Everyday computer, office software and IT basics for study, work and online opportunities.",
-    audience: "Beginners, students and office workers who want confident, practical computer skills.",
-  },
-  {
     id: "design-video",
-    title: "Graphic Design & Video Editing",
+    title: "Animation & Video Editing",
     short: "Design & Video",
-    description: "Creative design and video editing skills with industry tools and AI-assisted workflows.",
-    audience: "Creative learners, aspiring designers and video editors, and content creators.",
+    description: "Creative video editing and animation skills with industry-standard tools.",
+    audience: "Creative learners, aspiring video editors and animators, and content creators.",
+  },
+];
+
+const list: Omit<Course, "availability">[] = [
+  {
+    id: "digital-marketing",
+    title: "Digital Marketing",
+    category: "digital-marketing",
+    short: "A complete master course covering SEO, social media, paid ads, content and analytics.",
+    overview:
+      "Our Digital Marketing Master Course gives you a complete, practical grounding in how brands grow online. You will learn to plan and run campaigns across Google, Meta, TikTok and YouTube, rank websites through SEO, create content that converts and measure results with analytics. The course is built around hands-on projects, so you finish with real campaign experience you can show to employers or clients.",
+    learn: [
+      "Search Engine Optimization (SEO)",
+      "Social Media Marketing (SMM)",
+      "Google Ads campaigns",
+      "Meta Ads for Facebook and Instagram",
+      "TikTok Ads and viral content",
+      "YouTube marketing",
+      "Content creation and strategy",
+      "Website analytics and performance tracking",
+      "E-commerce marketing",
+      "Campaign planning, execution and scaling",
+    ],
+    audience:
+      "Students, job seekers, freelancers and business owners who want a complete, job-ready skill set in digital marketing.",
+    fee: 10500,
+    originalFee: 15000,
+    image: "/images/course-dm.webp",
+    imageAlt: "Desk with marketing books and a strategy note",
+    featured: true,
   },
   {
-    id: "freelancing",
-    title: "Freelancing & Online Business",
-    short: "Freelancing",
-    description: "Find clients, communicate professionally and build an online service or business.",
-    audience: "Anyone who wants to offer their skills online or start a digital business.",
+    id: "web-and-software-development",
+    title: "Web & Software Development",
+    category: "it-software",
+    short: "Build modern websites and applications with HTML, CSS, JavaScript and Python.",
+    overview:
+      "Turn your ideas into working websites and software. This course takes you from the fundamentals of HTML, CSS and JavaScript through to backend development, databases and Python programming. You will build responsive websites, interactive user interfaces and complete full-stack projects from scratch, learning the same workflow professional developers use every day.",
+    learn: [
+      "Web development with HTML, CSS and JavaScript",
+      "Frontend development and responsive interfaces",
+      "Backend development, databases, server-side logic and APIs",
+      "Python programming",
+      "Full-stack projects built from scratch",
+      "Software development and design principles",
+    ],
+    audience:
+      "Beginners, students and career-switchers who want to become web or software developers, or build their own projects.",
+    fee: 21000,
+    originalFee: 30000,
+    image: "/images/course-web.webp",
+    imageAlt: "Colorful code on a dark editor screen",
+    featured: true,
   },
   {
-    id: "office-business",
-    title: "Office, Business & Professional Skills",
-    short: "Professional Skills",
-    description: "Communication, administration and workplace skills that help you succeed professionally.",
-    audience: "Job seekers, office staff and professionals who want to grow in the workplace.",
+    id: "seo",
+    title: "SEO (Search Engine Optimization)",
+    category: "digital-marketing",
+    short: "Rank higher on Google, grow organic traffic and turn searches into customers.",
+    overview:
+      "Learn how to improve a website's Google ranking and attract steady, organic traffic. This course covers every part of modern SEO, from keyword research and on-page optimization to link building and technical SEO. You will work with professional SEO tools to audit websites, track progress and build a long-term growth strategy for your own site or your clients'.",
+    learn: [
+      "Keyword research that brings real traffic",
+      "On-page SEO: content, meta tags and site structure",
+      "Off-page SEO and quality backlink building",
+      "Technical SEO: site speed, mobile-friendliness and fixes",
+      "SEO tools and analytics",
+      "SEO strategy and long-term growth",
+    ],
+    audience:
+      "Website owners, bloggers, marketers and freelancers who want to grow traffic and offer SEO as a service.",
+    fee: 17500,
+    originalFee: 25000,
+    image: "/images/svc-marketing.webp",
+    imageAlt: "Laptop showing a marketing analytics dashboard",
+    featured: true,
+  },
+  {
+    id: "google-ads",
+    title: "Google Ads",
+    category: "digital-marketing",
+    short: "Master Search, Display and YouTube ads and turn clicks into customers.",
+    overview:
+      "Learn to promote businesses, products and services with Google Ads. This course shows you how to plan, launch and manage profitable campaigns across Google Search, the Display Network and YouTube. You will learn to target the right audience, control your budget, measure return on investment and continuously optimize campaigns for better results.",
+    learn: [
+      "Google Search Ads",
+      "Google Display Ads across websites and apps",
+      "YouTube video ad campaigns",
+      "Campaign setup, management and tracking",
+      "Analytics, reporting and ROI measurement",
+      "Ad optimization for better performance",
+    ],
+    audience: "Business owners, marketers and freelancers who want to generate leads and sales through paid search.",
+    fee: 21000,
+    originalFee: 30000,
+    image: "/images/course-ads.webp",
+    imageAlt: "Person reviewing ad campaigns on a phone and laptop",
+    featured: true,
+  },
+  {
+    id: "meta-ads",
+    title: "Meta Ads & Advertising",
+    category: "digital-marketing",
+    short: "Run smart Facebook and Instagram ad campaigns that deliver real results.",
+    overview:
+      "Learn to run Facebook and Instagram ads that grow a business, brand or online store. You will work hands-on in Meta Ads Manager to build targeted campaigns, reach the right audience and generate leads and sales. The course also covers reading campaign data so you can optimize spend and scale what works.",
+    learn: [
+      "Facebook Ads creation and optimization",
+      "Instagram Ads for brand growth and sales",
+      "Audience targeting for maximum results",
+      "Campaign planning and management",
+      "Lead generation and sales campaigns",
+      "Analytics and optimization",
+    ],
+    audience: "Business owners, online sellers, marketers and freelancers who want to advertise on Facebook and Instagram.",
+    fee: 7000,
+    originalFee: 10000,
+    image: "/images/svc-ads.webp",
+    imageAlt: "Monitor with audience analytics charts",
+  },
+  {
+    id: "youtube-automation",
+    title: "YouTube Automation",
+    category: "youtube",
+    short: "Build and grow YouTube channels with AI tools and efficient workflows.",
+    overview:
+      "Learn how to set up, run and grow a YouTube channel with a smart, efficient workflow. This course covers channel setup, finding the right niche, scripting and content planning, and using AI tools for voiceovers, video, thumbnails and uploads. You will also learn YouTube SEO, monetization requirements and how to build a complete automation strategy, all while following YouTube's policies on originality and copyright.",
+    learn: [
+      "YouTube channel setup and optimization",
+      "Niche research, script ideas and content creation",
+      "AI tools for voiceover, video, thumbnails and uploads",
+      "YouTube SEO for more views and growth",
+      "Monetization and multiple income streams",
+      "A complete automation strategy",
+    ],
+    audience: "Aspiring YouTubers, content creators and freelancers who want to build a structured YouTube workflow.",
+    fee: 17500,
+    originalFee: 25000,
+    image: "/images/courses/yt-play-icon.webp",
+    imageAlt: "Red video play button icon",
+    featured: true,
+  },
+  {
+    id: "video-editing",
+    title: "Video Editing",
+    category: "design-video",
+    short: "Turn raw footage into professional videos with Premiere Pro, After Effects and more.",
+    overview:
+      "Turn raw footage into engaging, professional videos. This course takes you from editing basics to advanced techniques using industry tools including Adobe Premiere Pro, After Effects, DaVinci Resolve, CapCut and Filmora. You will learn cutting, transitions, color grading, audio editing, motion graphics and green-screen effects, and build a portfolio that helps you start freelancing.",
+    learn: [
+      "Editing basics: tools, interface and workflow",
+      "Cutting and trimming for a smooth flow",
+      "Transitions and effects",
+      "Color grading",
+      "Audio editing, music and sound effects",
+      "Motion graphics, text and titles",
+      "Green screen and VFX",
+      "YouTube, Reels, Shorts and TikTok editing",
+      "Export settings for every platform",
+      "Portfolio building and freelancing guidance",
+    ],
+    audience: "Beginners, content creators and aspiring editors who want to edit professionally or offer editing services.",
+    fee: 10500,
+    originalFee: 15000,
+    image: "/images/courses/video-editing-studio.webp",
+    imageAlt: "Video editing software open on a desktop computer",
+    featured: true,
+  },
+  {
+    id: "content-creation-and-reels-production",
+    title: "Content Creation & Reels Production",
+    category: "social-media",
+    short: "Plan, shoot and edit engaging short videos and viral-style reels.",
+    overview:
+      "Turn your creativity into a professional skill. This course teaches you how to plan, shoot and edit short-form videos that grab attention, from camera angles and lighting to hooks and storytelling. You will learn how Instagram Reels, YouTube Shorts and TikTok work, and how to create platform-specific content that builds your personal brand and audience.",
+    learn: [
+      "Short-form video planning and creation",
+      "Shooting and lighting techniques",
+      "Hooks and storytelling that keep viewers watching",
+      "Branding and personal brand content",
+      "Instagram Reels and YouTube Shorts best practices",
+      "Editing and transitions",
+      "Platform-specific social media content",
+    ],
+    audience: "Aspiring creators, influencers, small businesses and social media managers.",
+    fee: 7000,
+    originalFee: 10000,
+    image: "/images/courses/video-creator-setup.webp",
+    imageAlt: "Content creator studio with camera and monitors",
+  },
+  {
+    id: "2d-and-3d-animation",
+    title: "2D & 3D Animation",
+    category: "design-video",
+    short: "Learn character design, modeling, rigging and animation.",
+    overview:
+      "Learn professional 2D and 3D animation and bring your creative ideas to life. This course covers the complete animation pipeline: designing original characters, modeling them in 2D and 3D, rigging skeletons and controls for realistic movement, and animating them into finished scenes. It is a strong foundation for careers in animation, games, advertising and content creation.",
+    learn: [
+      "Character design from scratch",
+      "2D and 3D modeling techniques",
+      "Rigging: skeletons and controls for realistic movement",
+      "Animation principles and bringing characters to life",
+    ],
+    audience: "Creative learners, artists and aspiring animators interested in animation, games and visual content.",
+    fee: 17500,
+    originalFee: 25000,
+    image: "/images/courses/design-tablet-drawing.webp",
+    imageAlt: "Designer drawing on a graphics tablet",
   },
 ];
 
-/* ───────────────────────────── Raw course list (title, description) ───────────────────────────── */
+export const courses: Course[] = list.map((c) => ({ availability: "open", ...c }));
 
-type Raw = [title: string, short: string];
-
-const raw: Record<CategoryId, Raw[]> = {
-  "it-software": [
-    ["Web Development", "Build modern, responsive websites from the ground up."],
-    ["Frontend Web Development", "Create the visual, interactive side of websites that users see and use."],
-    ["Backend Web Development", "Build the servers, logic and data handling that power web applications."],
-    ["Full-Stack Web Development", "Combine frontend and backend skills to build complete web applications."],
-    ["HTML and CSS", "Structure and style web pages with the core languages of the web."],
-    ["JavaScript Programming", "Add interactivity and logic to websites with the language of the web."],
-    ["TypeScript", "Write safer, more maintainable JavaScript with static types."],
-    ["React.js", "Build fast, component-based user interfaces with React."],
-    ["Next.js", "Create production-ready React websites with routing and server rendering."],
-    ["Node.js", "Use JavaScript on the server to build APIs and backend services."],
-    ["Python Programming", "Learn a beginner-friendly language used in web, data and automation."],
-    ["Java Programming", "Learn object-oriented programming with one of the most widely used languages."],
-    ["C and C++ Programming", "Understand programming fundamentals with two foundational languages."],
-    ["PHP and Laravel Development", "Build dynamic websites and web applications with PHP and Laravel."],
-    ["Database Management and SQL", "Design databases and query data with SQL."],
-    ["MySQL Database", "Create, manage and query relational databases with MySQL."],
-    ["MongoDB", "Store and work with flexible, document-based data in MongoDB."],
-    ["API Development", "Design and build APIs that let applications communicate."],
-    ["Git and GitHub", "Track code changes and collaborate using version control."],
-    ["Software Development Fundamentals", "Understand how software is planned, built, tested and maintained."],
-    ["WordPress Website Development", "Build and customize professional websites with WordPress."],
-    ["Shopify Store Development", "Set up and customize online stores on Shopify."],
-    ["E-commerce Website Development", "Plan and build websites that sell products online."],
-    ["UI/UX Design", "Design user-friendly, attractive interfaces and digital experiences."],
-    ["Figma for UI/UX Design", "Design and prototype websites and apps in Figma."],
-    ["Software Testing and QA Fundamentals", "Learn how to test software and keep quality high."],
-    ["Android App Development", "Build mobile applications for Android devices."],
-    ["Mobile Application Development Fundamentals", "Understand how mobile apps are designed, built and published."],
-    ["Cloud Computing Fundamentals", "Understand cloud services, hosting and how modern apps run online."],
-    ["Cybersecurity Fundamentals", "Learn the basics of protecting systems, data and users online."],
-  ],
-  "ai-automation": [
-    ["Artificial Intelligence Fundamentals", "Understand what AI is, how it works and where it is used."],
-    ["Generative AI Fundamentals", "Learn how AI creates text, images, audio and video."],
-    ["Prompt Engineering", "Write clear, effective prompts to get better results from AI tools."],
-    ["AI Tools for Productivity", "Use AI tools to research, write and organize work more efficiently."],
-    ["AI Content Creation", "Create written and visual content with the help of AI tools."],
-    ["AI Image Generation", "Generate and refine images with AI image tools, responsibly."],
-    ["AI Video Creation", "Produce videos using AI-powered creation and editing tools."],
-    ["AI Voiceover and Audio Tools", "Create voiceovers and edit audio with AI-powered tools."],
-    ["AI Chatbot Development", "Build chatbots that answer questions and assist users."],
-    ["AI Agents Development", "Understand and build AI agents that complete multi-step tasks."],
-    ["AI Workflow Automation", "Connect AI tools into automated workflows that save time."],
-    ["No-Code Automation", "Automate repetitive tasks without writing code."],
-    ["Business Process Automation", "Identify and automate routine business processes."],
-    ["AI for Digital Marketing", "Use AI to plan, create and analyze marketing campaigns."],
-    ["AI for Social Media Content", "Plan and create social media content faster with AI tools."],
-    ["AI for Freelancers", "Use AI tools to deliver client work more efficiently."],
-    ["AI-Powered Website Development", "Build websites faster with AI-assisted development tools."],
-    ["Introduction to Machine Learning", "Learn the core ideas behind machine learning and how models learn."],
-    ["Python for AI Fundamentals", "Use Python to work with data and basic AI concepts."],
-    ["AI Automation for Businesses", "Apply AI and automation to everyday business operations."],
-  ],
-  "digital-marketing": [
-    ["Complete Digital Marketing", "A broad, practical course covering the main digital marketing channels."],
-    ["Digital Marketing Fundamentals", "Learn the core concepts and channels of digital marketing."],
-    ["Search Engine Optimization (SEO)", "Improve website visibility on search engines like Google."],
-    ["On-Page SEO", "Optimize website content and structure for better rankings."],
-    ["Off-Page SEO", "Build authority through links, mentions and online reputation."],
-    ["Technical SEO Fundamentals", "Improve site speed, crawling and indexing for search engines."],
-    ["Local SEO and Google Business Profile", "Help local businesses get found in local search and Maps."],
-    ["Google Ads", "Plan and manage advertising campaigns on Google."],
-    ["Search Advertising", "Reach people actively searching with targeted search ads."],
-    ["Display Advertising", "Build awareness with visual ads across websites and apps."],
-    ["YouTube Advertising", "Plan and run video ad campaigns on YouTube."],
-    ["Meta Ads", "Advertise across Facebook and Instagram with Meta's ad tools."],
-    ["Facebook Advertising", "Create and manage targeted advertising campaigns on Facebook."],
-    ["Instagram Advertising", "Run visual ad campaigns that reach audiences on Instagram."],
-    ["Google Analytics Fundamentals", "Measure website traffic and user behavior with Google Analytics."],
-    ["Google Search Console", "Monitor and improve how your site appears in Google Search."],
-    ["Keyword Research", "Find the search terms your audience uses."],
-    ["Content Marketing", "Attract and engage audiences with valuable content."],
-    ["Email Marketing", "Build email lists and send campaigns that people want to read."],
-    ["Affiliate Marketing", "Understand how affiliate partnerships and commissions work."],
-    ["Lead Generation", "Attract and capture potential customers for a business."],
-    ["Conversion Rate Optimization", "Turn more website visitors into customers or leads."],
-    ["Marketing Analytics", "Measure campaign performance and make data-informed decisions."],
-    ["Digital Marketing Strategy", "Plan marketing that connects business goals to the right channels."],
-    ["E-commerce Marketing", "Promote online stores and grow product sales."],
-    ["Freelancing in Digital Marketing", "Offer digital marketing services to clients as a freelancer."],
-  ],
-  "social-media": [
-    ["Social Media Marketing Fundamentals", "Learn how brands grow and engage audiences on social media."],
-    ["Facebook Page Management", "Set up, manage and grow a professional Facebook page."],
-    ["Instagram Marketing", "Grow a brand on Instagram with strong content and strategy."],
-    ["Facebook and Instagram Marketing", "Market a brand across Facebook and Instagram together."],
-    ["Social Media Account Management", "Manage brand accounts professionally across platforms."],
-    ["Social Media Strategy", "Plan social media activity around clear goals and audiences."],
-    ["Social Media Content Planning", "Plan consistent, on-brand content in advance."],
-    ["Social Media Calendar Creation", "Build content calendars that keep posting organized."],
-    ["Content Creation for Social Media", "Create posts, carousels and stories that engage audiences."],
-    ["Social Media Graphic Design", "Design eye-catching graphics for social media posts."],
-    ["Reels Creation and Editing", "Plan, shoot and edit short vertical videos."],
-    ["Short-Form Video Editing", "Edit engaging short videos for Reels, Shorts and TikTok."],
-    ["Instagram Reels Marketing", "Use Reels to grow reach and engagement on Instagram."],
-    ["Facebook Reels", "Create and publish Reels that perform on Facebook."],
-    ["TikTok Marketing", "Build brand presence and engagement on TikTok."],
-    ["LinkedIn Marketing", "Grow professional and B2B brands on LinkedIn."],
-    ["Personal Branding", "Build a credible, consistent personal brand online."],
-    ["Social Media Community Management", "Engage followers, handle comments and build community."],
-    ["Social Media Analytics", "Track performance and improve results with social media data."],
-    ["Influencer Marketing Fundamentals", "Understand how brands work with creators and influencers."],
-    ["Social Media Advertising", "Run paid campaigns across social media platforms."],
-    ["Social Media Marketing with AI", "Use AI tools to plan, create and analyze social content."],
-    ["Freelancing as a Social Media Manager", "Offer social media management services to clients."],
-  ],
-  youtube: [
-    ["YouTube Automation Fundamentals", "Learn how to run a structured YouTube content workflow with tools and teams."],
-    ["YouTube Channel Creation", "Set up a professional YouTube channel the right way."],
-    ["YouTube Channel Management", "Manage uploads, playlists and channel settings effectively."],
-    ["YouTube Content Strategy", "Plan content around your audience and channel goals."],
-    ["YouTube Niche Research", "Research and choose a sustainable channel niche."],
-    ["YouTube Keyword Research", "Find topics and search terms viewers look for on YouTube."],
-    ["YouTube SEO", "Optimize titles, descriptions and tags for discovery on YouTube."],
-    ["YouTube Script Writing", "Write clear, engaging scripts for YouTube videos."],
-    ["AI-Powered Script Writing", "Draft and refine scripts with AI, keeping content original."],
-    ["YouTube Voiceover Creation", "Record and produce clear, professional voiceovers."],
-    ["AI Voiceover Tools", "Create voiceovers with AI tools while following platform policies."],
-    ["YouTube Video Editing", "Edit videos with pacing, graphics and sound that keep viewers watching."],
-    ["Faceless YouTube Channel Creation", "Produce original content for channels without appearing on camera."],
-    ["AI Video Production", "Use AI tools to support research, visuals and editing."],
-    ["YouTube Thumbnail Design", "Design clear, clickable thumbnails that represent videos honestly."],
-    ["YouTube Channel Branding", "Create a consistent look for banners, logos and intros."],
-    ["YouTube Shorts Creation", "Plan and produce vertical Shorts for YouTube."],
-    ["YouTube Analytics", "Use YouTube Analytics to understand viewers and improve content."],
-    ["YouTube Monetization Fundamentals", "Understand YouTube's monetization requirements and policies. No earnings are guaranteed."],
-    ["YouTube Copyright and Content Policies", "Learn copyright, fair use basics and YouTube's community guidelines."],
-    ["YouTube Content Planning", "Organize ideas, schedules and production pipelines."],
-    ["YouTube Workflow Automation", "Streamline production tasks with tools, templates and checklists."],
-    ["YouTube Content Repurposing", "Turn long videos into Shorts, posts and other formats."],
-    ["Freelancing for YouTube Creators", "Offer editing, scripting and channel services to creators."],
-  ],
-  // Design and video tools live in "design-video"; this category keeps core computer and office skills.
-  computer: [
-    ["Basic Computer Skills", "Use a computer confidently for everyday tasks."],
-    ["Computer Fundamentals", "Understand how computers, software and files work."],
-    ["MS Office", "Learn Word, Excel and PowerPoint for study and work."],
-    ["Microsoft Word", "Create and format professional documents."],
-    ["Microsoft Excel", "Organize data, build tables and use essential formulas."],
-    ["Microsoft PowerPoint", "Design clear, engaging presentations."],
-    ["Microsoft Outlook", "Manage email, calendars and contacts efficiently."],
-    ["Advanced Excel", "Work with advanced formulas, pivot tables and data tools."],
-    ["Excel Formulas and Functions", "Master the formulas and functions used every day at work."],
-    ["Excel Data Analysis", "Analyze, summarize and visualize data in Excel."],
-    ["Google Workspace", "Work and collaborate with Google's online productivity tools."],
-    ["Google Docs", "Create and collaborate on documents online."],
-    ["Google Sheets", "Organize and analyze data in online spreadsheets."],
-    ["Google Slides", "Build and present slides online."],
-    ["Internet and Email Fundamentals", "Browse safely and communicate effectively by email."],
-    ["Windows Operating System Fundamentals", "Navigate and manage files, settings and apps in Windows."],
-    ["Computer Hardware Fundamentals", "Understand computer components and basic troubleshooting."],
-    ["Computer Networking Fundamentals", "Learn how computers connect and share data across networks."],
-    ["Data Entry", "Enter and manage data accurately and efficiently."],
-    ["Typing Skills", "Improve typing speed and accuracy."],
-    ["Urdu and English Typing", "Type confidently in both Urdu and English."],
-    ["Office Administration", "Handle day-to-day office tasks and documentation."],
-    ["Computerized Accounting Fundamentals", "Learn the basics of keeping accounts with software."],
-    ["QuickBooks Fundamentals", "Manage basic bookkeeping tasks in QuickBooks."],
-    ["Online Work and Digital Skills", "Build the digital skills needed for online study and work."],
-    ["E-commerce Fundamentals", "Understand how online stores and selling online work."],
-  ],
-  "design-video": [
-    ["Graphic Design Fundamentals", "Learn the principles of layout, color and typography."],
-    ["Adobe Photoshop", "Edit photos and create graphics in Photoshop."],
-    ["Adobe Illustrator", "Create logos, icons and vector illustrations."],
-    ["Canva Graphic Design", "Design professional graphics quickly with Canva."],
-    ["Logo Design Fundamentals", "Design simple, memorable logos for brands."],
-    ["Brand Identity Design", "Create cohesive visual identities for businesses."],
-    ["Video Editing Fundamentals", "Learn cutting, transitions, audio and color basics."],
-    ["CapCut Video Editing", "Edit engaging videos quickly with CapCut."],
-    ["Adobe Premiere Pro", "Edit professional videos with Premiere Pro."],
-    ["Motion Graphics Fundamentals", "Bring designs to life with simple animation."],
-    ["AI-Assisted Design", "Speed up design work with AI tools, responsibly."],
-    ["AI Video Editing Tools", "Edit videos faster with AI-powered features."],
-    ["Creative Content Production", "Plan and produce visual content from idea to delivery."],
-    ["Freelancing for Designers and Video Editors", "Offer design and editing services to clients."],
-  ],
-  freelancing: [
-    ["Freelancing Fundamentals", "Understand how freelancing works and how to get started."],
-    ["Freelancing Profile Optimization", "Create profiles that clearly present your skills and services."],
-    ["Client Communication", "Communicate professionally and manage client expectations."],
-    ["Proposal Writing", "Write clear proposals that respond to client needs."],
-    ["Personal Branding for Freelancers", "Present yourself professionally online as a freelancer."],
-    ["Finding Clients Online", "Find and approach potential clients ethically."],
-    ["Upwork Fundamentals", "Learn how Upwork works, following its policies."],
-    ["Fiverr Fundamentals", "Learn how Fiverr works and how to offer services there, following its policies."],
-    ["Remote Work Skills", "Work productively and communicate well with remote teams."],
-    ["Portfolio-Free Freelancing Strategies", "Win early work through samples, trial tasks and clear communication."],
-    ["Digital Service Business Fundamentals", "Turn your skills into a structured service business."],
-    ["E-commerce Business Fundamentals", "Understand products, suppliers and selling online."],
-    ["Shopify Store Management", "Run day-to-day operations of a Shopify store."],
-    ["WordPress Business Websites", "Build and manage business websites with WordPress."],
-    ["Virtual Assistant Skills", "Support businesses remotely with admin and organization tasks."],
-    ["Digital Product Fundamentals", "Understand how to plan and sell digital products."],
-    ["Online Business Marketing", "Promote an online business and attract customers."],
-  ],
-  "office-business": [
-    ["Office Management", "Organize office operations, people and resources."],
-    ["Administrative Skills", "Handle scheduling, records and office coordination."],
-    ["Business Communication", "Communicate clearly in writing, meetings and calls."],
-    ["Professional Email Writing", "Write clear, polite and effective professional emails."],
-    ["Presentation Skills", "Present ideas confidently and clearly."],
-    ["Microsoft Office Productivity", "Use Office tools efficiently in daily work."],
-    ["Excel for Business", "Use Excel for reports, budgets and business data."],
-    ["Data Analysis Fundamentals", "Understand data and draw useful conclusions from it."],
-    ["Customer Support Fundamentals", "Help customers professionally across channels."],
-    ["Customer Relationship Management Fundamentals", "Manage customer relationships and data with CRM tools."],
-    ["Project Management Fundamentals", "Plan, organize and deliver projects on time."],
-    ["Business Documentation", "Prepare reports, letters and business documents."],
-    ["Digital Workplace Skills", "Work effectively with modern digital workplace tools."],
-    ["Professional CV and Resume Preparation", "Prepare a clear, professional CV."],
-    ["Interview Preparation", "Prepare and practise for job interviews."],
-    ["Workplace Computer Skills", "Use the computer skills employers expect day to day."],
-  ],
-};
-
-/* ───────────────────────────── Confirmed details (edit me) ───────────────────────────── */
-
-export const confirmed: Record<string, Partial<Pick<Course, "duration" | "level" | "format" | "availability">>> = {
-  // "web-development": { duration: "3 months", level: "Beginner", format: "On-campus", availability: "open" },
-};
-
-/** Courses highlighted on the Home and Institute pages. */
-const featuredIds = [
-  "web-development",
-  "generative-ai-fundamentals",
-  "complete-digital-marketing",
-  "social-media-marketing-fundamentals",
-  "youtube-automation-fundamentals",
-  "ms-office",
-];
-
-/* ───────────────────────────── Images ───────────────────────────── */
-
-const I = (file: string, alt: string) => ({ src: file.startsWith("/") ? file : `/images/courses/${file}.webp`, alt });
-
-const pools = {
-  dev: [
-    I("/images/course-web.webp", "Colorful code on a dark editor screen"),
-    I("dev-laptop-code", "Laptop showing code on a bright desk"),
-    I("dev-svg-code", "Close-up of web code on a screen"),
-    I("dev-dark-editor", "Code editor open on a laptop in a dark room"),
-    I("dev-desk-code", "Developer desk with code on a laptop"),
-    I("/images/svc-web.webp", "Minimal developer workspace with code on screen"),
-  ],
-  python: [I("dev-python-code", "Python code on a dark screen")],
-  ux: [
-    I("ux-app-screens", "App interface designs displayed on a large monitor"),
-    I("ux-desk-wireframes", "Designer desk with wireframes and mobile sketches"),
-    I("/images/svc-seo.webp", "Team sketching wireframes for a website and app"),
-  ],
-  infra: [
-    I("tech-server-network", "Network cables connected to server racks"),
-    I("tech-global-network", "Earth at night showing connected city lights"),
-    I("tech-circuit-board", "Close-up of a computer circuit board"),
-  ],
-  ai: [
-    I("ai-abstract-network", "Abstract illustration of connected AI nodes"),
-    I("ai-robot", "Friendly humanoid robot"),
-    I("ai-letters", "3D letters spelling AI on a digital grid"),
-    I("ai-robot-hand", "Robotic hand on a light background"),
-  ],
-  marketing: [
-    I("/images/svc-marketing.webp", "Laptop showing a marketing analytics dashboard"),
-    I("/images/course-dm.webp", "Desk with marketing books and a strategy note"),
-    I("/images/svc-ads.webp", "Monitor with audience analytics charts"),
-    I("/images/course-ads.webp", "Person reviewing ad campaigns on a phone and laptop"),
-    I("marketing-strategy-board", "Hand arranging a marketing plan on a whiteboard"),
-  ],
-  social: [
-    I("/images/course-social.webp", "Colorful 'Social Media' lettering"),
-    I("/images/svc-social.webp", "3D social media app icons"),
-    I("social-laptop-phone", "Person browsing social media on a laptop and phone"),
-    I("/images/svc-mobile.webp", "Smartphone home screen with app icons"),
-  ],
-  video: [
-    I("video-timeline", "Video editing timeline on a monitor"),
-    I("video-editing-studio", "Video editing software open on a desktop computer"),
-    I("video-creator-setup", "Content creator studio with camera and monitors"),
-    I("video-camera-lens", "Close-up of a camera lens with colorful lighting"),
-  ],
-  youtube: [
-    I("yt-play-icon", "Red video play button icon"),
-    I("video-creator-setup", "Content creator studio with camera and monitors"),
-    I("video-editing-studio", "Video editing software open on a desktop computer"),
-    I("video-timeline", "Video editing timeline on a monitor"),
-    I("video-camera-lens", "Close-up of a camera lens with colorful lighting"),
-  ],
-  computer: [
-    I("computer-typing", "Hands typing on a laptop keyboard"),
-    I("computer-bright-desk", "Laptop on a bright, tidy desk"),
-    I("computer-online-class", "Laptop on a table ready for an online class"),
-    I("computer-typing-bw", "Person typing on a laptop, in black and white"),
-    I("/images/inst-lab.webp", "Students working together at computers"),
-  ],
-  design: [
-    I("design-swatches", "Color swatches and brand design materials"),
-    I("design-tablet-drawing", "Designer drawing on a graphics tablet"),
-    I("design-creative-apps", "Designer desk with creative app stickers"),
-    I("ux-app-screens", "App interface designs displayed on a large monitor"),
-  ],
-  freelance: [
-    I("freelance-remote-overhead", "Freelancer working remotely on a laptop"),
-    I("freelance-cafe-laptop", "Laptop and notebook on a cafe table"),
-    I("freelance-home-desk", "Bright home office desk with laptop"),
-  ],
-  office: [
-    I("office-laptop-meeting", "Team meeting around a table with laptops"),
-    I("office-team-discussion", "Colleagues in a business discussion"),
-    I("office-collaboration", "Two colleagues celebrating at work"),
-    I("office-teamwork", "Team putting hands together"),
-    I("office-professional", "Smiling professional in a business setting"),
-  ],
-};
-
-type Pool = keyof typeof pools;
-
-const categoryPool: Record<CategoryId, Pool> = {
-  "it-software": "dev",
-  "ai-automation": "ai",
-  "digital-marketing": "marketing",
-  "social-media": "social",
-  youtube: "youtube",
-  computer: "computer",
-  "design-video": "design",
-  freelancing: "freelance",
-  "office-business": "office",
-};
-
-// More specific imagery for certain topics, regardless of category.
-const keywordPools: [RegExp, Pool][] = [
-  [/python/i, "python"],
-  [/ui\/ux|figma/i, "ux"],
-  [/cloud|network|cyber|hardware/i, "infra"],
-  [/youtube|thumbnail/i, "youtube"],
-  [/video|reels|capcut|premiere|motion|shorts|tiktok/i, "video"],
-  [/photoshop|illustrator|canva|logo|brand identity|graphic|design/i, "design"],
-];
-
-/* ───────────────────────────── Build the catalog ───────────────────────────── */
-
-export const slugify = (t: string) =>
-  t
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/\+\+/g, "pp")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-
-// When a course appears in several categories, the earliest category in this order keeps it.
-const priority: CategoryId[] = [
-  "it-software",
-  "ai-automation",
-  "digital-marketing",
-  "social-media",
-  "youtube",
-  "design-video",
-  "freelancing",
-  "office-business",
-  "computer",
-];
-
-function build(): Course[] {
-  const seen = new Set<string>();
-  const byCategory = new Map<CategoryId, Course[]>();
-  for (const cat of priority) {
-    const list: Course[] = [];
-    raw[cat].forEach(([title, short]) => {
-      const id = slugify(title);
-      if (seen.has(id)) return;
-      seen.add(id);
-      const kw = keywordPools.find(([re]) => re.test(title))?.[1];
-      const pool = pools[kw && !(cat === "youtube" && kw === "video") ? kw : categoryPool[cat]];
-      const img = pool[list.length % pool.length];
-      list.push({
-        id,
-        title,
-        category: cat,
-        short,
-        image: img.src,
-        imageAlt: img.alt,
-        availability: "on-request",
-        featured: featuredIds.includes(id),
-        ...confirmed[id],
-      });
-    });
-    byCategory.set(cat, list);
-  }
-  // Return in the display order of `categories`.
-  return categories.flatMap((c) => byCategory.get(c.id) ?? []);
-}
-
-export const courses: Course[] = build();
-
-export const featuredCourses: Course[] = featuredIds
-  .map((id) => courses.find((c) => c.id === id))
-  .filter((c): c is Course => Boolean(c));
+export const featuredCourses: Course[] = courses.filter((c) => c.featured);
 
 export const getCategory = (id: CategoryId) => categories.find((c) => c.id === id)!;
 
 export const coursesIn = (id: CategoryId) => courses.filter((c) => c.category === id);
+
+export const formatFee = (n: number) => `Rs ${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+
+export const discountPercent = (c: Course) => Math.round((1 - c.fee / c.originalFee) * 100);
