@@ -222,18 +222,18 @@ function Sparks({ count, still }: { count: number; still: boolean }) {
   );
 }
 
-/* ───────────────────────── Courses: graduation cap over a stack of books ───────────────────────── */
+/* ───────────────────────── Courses: a rocket lifting off a stack of books ───────────────────────── */
 
 export function CoursesScene({ lite = false, still = false, paused = false }: Props) {
   return (
-    <Stage lite={lite} still={still} paused={paused} camera={[3.3, 2.3, 7.6]}>
+    <Stage lite={lite} still={still} paused={paused} camera={[3.6, 2.2, 9.2]}>
       <ambientLight intensity={1.15} />
       <directionalLight position={[3, 6, 5]} intensity={2.4} />
       <directionalLight position={[-4, 2, -3]} intensity={0.9} color={CYAN_LIGHT} />
       <Rig still={still} sway={0.4}>
-        <group position={[0, -0.25, 0]}>
+        <group position={[0, -0.75, 0]}>
           <Books />
-          <Cap still={still} />
+          <Rocket still={still} />
           <SkillOrbit still={still} />
           {/* soft contact shadow so the stack sits on the light panel */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.42, 0]}>
@@ -272,49 +272,81 @@ function Books() {
   );
 }
 
-function Cap({ still }: { still: boolean }) {
+/** A rocket lifting off the book stack: skills turning into a career launch. */
+function Rocket({ still }: { still: boolean }) {
   const ref = useRef<THREE.Group>(null);
+  const spin = useRef<THREE.Group>(null);
+  const flame = useRef<THREE.Group>(null);
+
   useFrame(({ clock }) => {
-    if (!ref.current || still) return;
+    if (still) return;
     const t = clock.elapsedTime;
-    ref.current.position.y = 0.95 + Math.sin(t * 1.2) * 0.12;
-    ref.current.rotation.y = t * 0.45;
-    ref.current.rotation.z = Math.sin(t * 0.8) * 0.06;
+    if (ref.current) {
+      ref.current.position.y = 1.5 + Math.sin(t * 1.3) * 0.14;
+      ref.current.rotation.z = -0.22 + Math.sin(t * 0.7) * 0.05;
+    }
+    if (spin.current) spin.current.rotation.y = t * 0.6;
+    if (flame.current) {
+      // quick flicker so the exhaust feels alive
+      const f = 1 + Math.sin(t * 22) * 0.12 + Math.sin(t * 37) * 0.07;
+      flame.current.scale.set(1, f, 1);
+    }
   });
-  const corner = 2.3 / Math.SQRT2;
+
+  const fins = [0, 1, 2];
   return (
-    <group ref={ref} position={[0, 0.95, 0]} rotation={[0.12, 0.5, 0]}>
-      {/* board */}
-      <mesh rotation={[0, Math.PI / 4, 0]}>
-        <boxGeometry args={[2.3, 0.1, 2.3]} />
-        <meshStandardMaterial color={NAVY} metalness={0.5} roughness={0.35} />
-      </mesh>
-      <mesh rotation={[0, Math.PI / 4, 0]} position={[0, -0.06, 0]}>
-        <boxGeometry args={[2.36, 0.03, 2.36]} />
-        <meshBasicMaterial color={CYAN} toneMapped={false} />
-      </mesh>
-      {/* skull cap */}
-      <mesh position={[0, -0.4, 0]}>
-        <cylinderGeometry args={[0.8, 0.92, 0.68, 40]} />
-        <meshStandardMaterial color="#172733" metalness={0.4} roughness={0.4} />
-      </mesh>
-      {/* button, cord and tassel */}
-      <mesh position={[0, 0.09, 0]}>
-        <sphereGeometry args={[0.1, 20, 20]} />
-        <meshBasicMaterial color={CYAN_LIGHT} toneMapped={false} />
-      </mesh>
-      <mesh position={[corner / 2, 0.075, 0]} rotation={[0, 0, Math.PI / 2]}>
-        <cylinderGeometry args={[0.025, 0.025, corner, 8]} />
-        <meshBasicMaterial color={CYAN} toneMapped={false} />
-      </mesh>
-      <mesh position={[corner, -0.3, 0]}>
-        <cylinderGeometry args={[0.025, 0.025, 0.75, 8]} />
-        <meshBasicMaterial color={CYAN} toneMapped={false} />
-      </mesh>
-      <mesh position={[corner, -0.78, 0]} rotation={[Math.PI, 0, 0]}>
-        <coneGeometry args={[0.11, 0.3, 16]} />
-        <meshBasicMaterial color={CYAN_LIGHT} toneMapped={false} />
-      </mesh>
+    <group ref={ref} position={[0, 1.5, 0]} rotation={[0, 0, -0.22]}>
+      <group ref={spin}>
+        {/* body */}
+        <mesh>
+          <cylinderGeometry args={[0.42, 0.42, 1.3, 40]} />
+          <meshStandardMaterial color="#f4f7f9" metalness={0.25} roughness={0.3} />
+        </mesh>
+        {/* nose cone */}
+        <mesh position={[0, 1.0, 0]}>
+          <coneGeometry args={[0.42, 0.7, 40]} />
+          <meshStandardMaterial color={CYAN} metalness={0.3} roughness={0.25} />
+        </mesh>
+        {/* brand band */}
+        <mesh position={[0, 0.42, 0]}>
+          <cylinderGeometry args={[0.432, 0.432, 0.12, 40]} />
+          <meshStandardMaterial color={TEAL} metalness={0.3} roughness={0.3} />
+        </mesh>
+        {/* engine skirt */}
+        <mesh position={[0, -0.78, 0]}>
+          <cylinderGeometry args={[0.42, 0.3, 0.26, 40]} />
+          <meshStandardMaterial color={NAVY} metalness={0.5} roughness={0.35} />
+        </mesh>
+        {/* window */}
+        <mesh position={[0, 0.05, 0.4]}>
+          <sphereGeometry args={[0.15, 24, 24]} />
+          <meshStandardMaterial color={NAVY} metalness={0.7} roughness={0.15} />
+        </mesh>
+        <mesh position={[0, 0.05, 0.4]}>
+          <torusGeometry args={[0.17, 0.035, 12, 40]} />
+          <meshStandardMaterial color={CYAN_LIGHT} metalness={0.3} roughness={0.25} />
+        </mesh>
+        {/* fins */}
+        {fins.map((i) => (
+          <group key={i} rotation={[0, (i / fins.length) * Math.PI * 2 + Math.PI / 3, 0]}>
+            <mesh position={[0, -0.62, 0.52]} rotation={[0.35, 0, 0]}>
+              <boxGeometry args={[0.07, 0.58, 0.34]} />
+              <meshStandardMaterial color={CYAN} metalness={0.3} roughness={0.3} />
+            </mesh>
+          </group>
+        ))}
+      </group>
+      {/* exhaust flame */}
+      <group ref={flame} position={[0, -0.9, 0]}>
+        <mesh position={[0, -0.42, 0]} rotation={[Math.PI, 0, 0]}>
+          <coneGeometry args={[0.24, 0.84, 24]} />
+          <meshBasicMaterial color={CYAN} transparent opacity={0.75} toneMapped={false} depthWrite={false} />
+        </mesh>
+        <mesh position={[0, -0.26, 0]} rotation={[Math.PI, 0, 0]}>
+          <coneGeometry args={[0.13, 0.52, 20]} />
+          <meshBasicMaterial color="#e8fbff" toneMapped={false} />
+        </mesh>
+      </group>
     </group>
   );
 }
