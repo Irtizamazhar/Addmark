@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-/** The rising arrow from the logo, redrawn as a decorative animated stroke. */
+/** The rising arrow from the logo, redrawn as a decorative stroke that draws itself when scrolled into view. */
 export default function Swoosh({ className = "", delay = 0.4 }: { className?: string; delay?: number }) {
   return (
     <svg viewBox="0 0 600 260" fill="none" aria-hidden className={className}>
@@ -19,7 +19,8 @@ export default function Swoosh({ className = "", delay = 0.4 }: { className?: st
         strokeWidth="5"
         strokeLinecap="round"
         initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
+        whileInView={{ pathLength: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 1.6, delay, ease: [0.65, 0, 0.35, 1] }}
       />
       <motion.path
@@ -29,7 +30,8 @@ export default function Swoosh({ className = "", delay = 0.4 }: { className?: st
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.6, delay: delay + 1.3, ease: "easeOut" }}
       />
     </svg>

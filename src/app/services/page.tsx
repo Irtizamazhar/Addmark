@@ -37,7 +37,7 @@ export default function ServicesPage() {
         </ul>
       </PageHero>
 
-      <section className="section-y">
+      <section className="section-y overflow-x-clip">
         <div className="container-x space-y-16 lg:space-y-24">
           {services.map((s, i) => {
             const Icon = serviceIcons[s.icon];
@@ -49,7 +49,7 @@ export default function ServicesPage() {
                     <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] shadow-[0_40px_80px_-40px_rgba(10,18,24,0.55)]">
                       <Image src={s.image} alt={s.imageAlt} fill sizes="(min-width:1024px) 45vw, 100vw" className="object-cover transition-transform duration-[1.4s] hover:scale-105" />
                     </div>
-                    <span className={`bg-brand-gradient absolute -bottom-6 grid size-20 place-items-center rounded-3xl text-white shadow-[0_20px_40px_-15px_rgba(0,179,204,0.8)] ${flip ? "-left-3 sm:-left-6" : "-right-3 sm:-right-6"}`}>
+                    <span className={`bg-brand-gradient animate-float absolute -bottom-6 grid size-20 place-items-center rounded-3xl text-white shadow-[0_20px_40px_-15px_rgba(0,179,204,0.8)] ${flip ? "-left-3 sm:-left-6" : "-right-3 sm:-right-6"}`}>
                       <Icon className="size-8" />
                     </span>
                     <div aria-hidden className={`bg-grid-light absolute -top-4 -z-10 h-2/3 sm:-top-6 w-2/3 rounded-[2rem] ${flip ? "-right-3 sm:-right-6" : "-left-3 sm:-left-6"}`} />
@@ -62,7 +62,7 @@ export default function ServicesPage() {
                   <p className="mt-4 max-w-2xl text-lead text-ink-500">{s.description}</p>
                   <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                     {s.points.map((p) => (
-                      <li key={p} className="flex items-start gap-2.5 rounded-xl border border-ink-100 bg-ink-50/60 px-4 py-3 text-sm font-medium text-ink-700">
+                      <li key={p} className="flex items-start gap-2.5 rounded-xl border border-ink-100 bg-ink-50/60 px-4 py-3 text-sm font-medium text-ink-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-200 hover:bg-white hover:shadow-[0_14px_30px_-20px_rgba(1,97,121,0.5)]">
                         <CheckCircle2 className="mt-px size-4.5 shrink-0 text-brand-500" /> {p}
                       </li>
                     ))}

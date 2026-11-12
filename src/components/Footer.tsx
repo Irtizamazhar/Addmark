@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-ink-950 text-ink-300">
       <div aria-hidden className="bg-grid mask-fade-b pointer-events-none absolute inset-0 opacity-60" />
-      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-brand-600/15 blur-3xl" />
+      <div aria-hidden className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2"><div className="animate-aurora-slow size-full rounded-full bg-brand-600/15 blur-3xl" /></div>
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-500/60 to-transparent" />
 
       <div className="container-x relative grid grid-cols-2 gap-x-6 gap-y-10 pb-10 pt-14 lg:pt-16 lg:grid-cols-12 lg:gap-8 [&>*]:min-w-0">
@@ -64,6 +64,13 @@ export default function Footer() {
             <Clock className="mt-0.5 size-4 shrink-0 text-brand-400" /> {contact.hours}
           </li>
         </FooterCol>
+      </div>
+
+      {/* Oversized outlined wordmark */}
+      <div aria-hidden className="container-x mask-fade-b relative overflow-hidden">
+        <p className="text-outline select-none whitespace-nowrap text-center font-display text-[clamp(2.5rem,11vw,10.5rem)] font-extrabold leading-[0.9] tracking-tight">
+          {site.name}
+        </p>
       </div>
 
       <div className="container-x relative flex flex-col items-center justify-between gap-3 border-t border-white/8 py-6 text-xs text-ink-300 sm:flex-row">

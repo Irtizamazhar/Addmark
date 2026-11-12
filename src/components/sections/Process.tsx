@@ -70,7 +70,16 @@ export default function Process() {
 
         <div className="relative mt-10 lg:mt-12">
           {/* connecting line (desktop) */}
-          <div aria-hidden className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-px bg-gradient-to-r from-brand-200 via-brand-400 to-brand-200 lg:block" />
+          <div aria-hidden className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-px bg-ink-100 lg:block" />
+          <motion.div
+            aria-hidden
+            key={`line-${track}`}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "0px 0px -80px 0px" }}
+            transition={{ duration: 1.4, delay: 0.2, ease: [0.65, 0, 0.35, 1] }}
+            className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-0.5 origin-left -translate-y-px bg-gradient-to-r from-brand-300 via-brand-500 to-brand-300 lg:block"
+          />
 
           <AnimatePresence mode="wait">
             <motion.ol
@@ -87,10 +96,10 @@ export default function Process() {
                   variants={{ hidden: { opacity: 0, y: 24 }, show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } }}
                   className="group relative flex flex-col items-center text-center"
                 >
-                  <span className="relative z-10 grid size-16 place-items-center rounded-full border-4 border-white bg-ink-900 font-display text-lg font-bold text-white shadow-[0_10px_30px_-10px_rgba(10,18,24,0.5)] transition-colors duration-500 group-hover:bg-brand-500">
+                  <span className="relative z-10 grid size-16 place-items-center rounded-full border-4 border-white bg-ink-900 font-display text-lg font-bold text-white shadow-[0_10px_30px_-10px_rgba(10,18,24,0.5)] transition-all duration-500 group-hover:scale-110 group-hover:bg-brand-500 group-hover:shadow-[0_14px_34px_-8px_rgba(0,179,204,0.75)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div className="mt-4 w-full rounded-3xl lg:mt-5 border border-ink-100 bg-white p-6 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-brand-200 group-hover:shadow-[0_25px_50px_-30px_rgba(1,97,121,0.5)]">
+                  <div className="spotlight mt-4 w-full rounded-3xl lg:mt-5 border border-ink-100 bg-white p-6 transition-all duration-500 group-hover:-translate-y-1 group-hover:border-brand-200 group-hover:shadow-[0_25px_50px_-30px_rgba(1,97,121,0.5)]">
                     <h3 className="text-lg font-semibold">{s.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-ink-500">{s.text}</p>
                   </div>

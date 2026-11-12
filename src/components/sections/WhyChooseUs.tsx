@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Compass, HeartHandshake, Layers, Lightbulb, ShieldCheck, Users } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
+import TiltCard from "../ui/TiltCard";
+import Icon3D from "../ui/Icon3D";
 
 // Edit these to reflect ADDMARKPRO's real strengths.
 const reasons = [
@@ -26,7 +28,7 @@ export default function WhyChooseUs() {
             />
             <Reveal delay={0.15} className="relative mt-8 hidden lg:block">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem]">
-                <Image src="/images/cta-learning.webp" alt="Overhead view of a team working on laptops around a shared table" fill sizes="35vw" className="object-cover" />
+                <Image src="/images/cta-learning.webp" alt="Overhead view of a team working on laptops around a shared table" fill sizes="35vw" className="object-cover transition-transform duration-[1.4s] ease-out hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-brand-700/50 to-transparent" />
               </div>
               <div aria-hidden className="bg-brand-gradient absolute -bottom-4 -right-4 -z-10 h-full w-full rounded-[1.75rem] opacity-30" />
@@ -37,14 +39,14 @@ export default function WhyChooseUs() {
         <ul className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
           {reasons.map(({ icon: Icon, title, text }, i) => (
             <Reveal as="li" key={title} delay={(i % 2) * 0.1} className={i % 2 === 1 ? "lg:translate-y-8" : ""}>
-              <div className="group relative h-full overflow-hidden rounded-3xl border border-ink-100 bg-white p-6 transition-all duration-500 hover:-translate-y-1 sm:p-7 hover:shadow-[0_25px_50px_-25px_rgba(1,97,121,0.4)]">
+              <TiltCard>
+              <div className="spotlight group relative h-full overflow-hidden rounded-3xl border border-ink-100 bg-white p-6 transition-all duration-500 hover:-translate-y-1 sm:p-7 hover:shadow-[0_25px_50px_-25px_rgba(1,97,121,0.4)]">
                 <span aria-hidden className="bg-brand-gradient absolute inset-x-0 top-0 h-1 origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100" />
-                <span className="grid size-12 place-items-center rounded-2xl bg-ink-900 text-brand-300 transition-transform duration-500 group-hover:rotate-[-6deg] group-hover:scale-110">
-                  <Icon className="size-5" />
-                </span>
+                <Icon3D icon={Icon} />
                 <h3 className="mt-5 text-lg font-semibold">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-500">{text}</p>
               </div>
+              </TiltCard>
             </Reveal>
           ))}
         </ul>

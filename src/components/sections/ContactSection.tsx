@@ -13,7 +13,7 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
 
   return (
     <section id="contact" className="relative overflow-hidden bg-ink-50 section-y">
-      <div aria-hidden className="absolute -left-40 bottom-0 size-[30rem] rounded-full bg-brand-200/40 blur-3xl" />
+      <div aria-hidden className="animate-aurora-slow absolute -left-40 bottom-0 size-[30rem] rounded-full bg-brand-200/40 blur-3xl" />
       <div className="container-x relative">
         <SectionHeading
           align="center"
@@ -25,8 +25,8 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
         <div className="mt-10 grid gap-5 lg:mt-12 lg:grid-cols-12 lg:gap-6">
           {/* Info panel */}
           <Reveal className="lg:col-span-5">
-            <div className="relative isolate h-full overflow-hidden rounded-[2rem] bg-ink-900 p-7 text-white sm:p-10">
-              <div aria-hidden className="absolute -right-20 -top-20 -z-10 size-64 rounded-full bg-brand-500/30 blur-3xl" />
+            <div className="glass-frame relative isolate h-full overflow-hidden rounded-[2rem] bg-ink-900 p-7 text-white sm:p-10">
+              <div aria-hidden className="animate-aurora absolute -right-20 -top-20 -z-10 size-64 rounded-full bg-brand-500/30 blur-3xl" />
               <div aria-hidden className="bg-grid absolute inset-0 -z-10 opacity-50" />
               <h3 className="text-2xl font-bold text-white">Get in touch</h3>
               <p className="mt-2 max-w-md text-sm text-ink-300">We&apos;d love to hear from you. Choose whatever works best for you.</p>
@@ -126,8 +126,8 @@ export default function ContactSection({ showMap = false }: { showMap?: boolean 
 
 function InfoRow({ icon, label, children }: { icon: React.ReactNode; label: string; children: React.ReactNode }) {
   return (
-    <li className="flex gap-4">
-      <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-300">{icon}</span>
+    <li className="group flex gap-4">
+      <span className="grid size-11 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/5 text-brand-300 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-brand-400/50 group-hover:bg-brand-500 group-hover:text-white">{icon}</span>
       <div className="min-w-0">
         <p className="text-xs font-semibold uppercase tracking-[0.15em] text-ink-300">{label}</p>
         <div className="mt-1 text-[15px] text-white">{children}</div>

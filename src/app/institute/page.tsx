@@ -7,6 +7,7 @@ import CoursesGrid from "@/components/sections/CoursesGrid";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import TiltCard from "@/components/ui/TiltCard";
 import { ButtonLink } from "@/components/ui/Button";
 import { site } from "@/content/site";
 
@@ -81,7 +82,8 @@ export default function InstitutePage() {
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-5">
             {offerings.map(({ icon: Icon, title, text }, i) => (
               <Reveal as="li" key={title} delay={(i % 3) * 0.08}>
-                <div className="group flex h-full gap-5 rounded-3xl border border-ink-100 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-200 sm:p-7 hover:shadow-[0_25px_50px_-30px_rgba(1,97,121,0.5)]">
+                <TiltCard>
+                <div className="spotlight group flex h-full gap-5 rounded-3xl border border-ink-100 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-200 sm:p-7 hover:shadow-[0_25px_50px_-30px_rgba(1,97,121,0.5)]">
                   <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-600 transition-colors duration-500 group-hover:bg-brand-500 group-hover:text-white">
                     <Icon className="size-5" />
                   </span>
@@ -90,6 +92,7 @@ export default function InstitutePage() {
                     <p className="mt-1.5 text-sm leading-relaxed text-ink-500">{text}</p>
                   </div>
                 </div>
+                </TiltCard>
               </Reveal>
             ))}
           </ul>

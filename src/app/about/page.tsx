@@ -9,6 +9,8 @@ import Process from "@/components/sections/Process";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import TiltCard from "@/components/ui/TiltCard";
+import Icon3D from "@/components/ui/Icon3D";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -43,16 +45,16 @@ export default function AboutPage() {
           <ul className="mt-10 grid gap-5 md:grid-cols-3 lg:mt-12 lg:gap-6">
             {pillars.map(({ icon: Icon, title, text }, i) => (
               <Reveal as="li" key={title} delay={i * 0.1}>
-                <div className="group relative h-full overflow-hidden rounded-3xl bg-white p-7 shadow-[0_20px_50px_-35px_rgba(10,18,24,0.4)] transition-all duration-500 hover:-translate-y-1.5">
+                <TiltCard>
+                <div className="spotlight group relative h-full overflow-hidden rounded-3xl bg-white p-7 shadow-[0_20px_50px_-35px_rgba(10,18,24,0.4)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(1,97,121,0.45)]">
                   <span aria-hidden className="absolute -right-8 -top-8 font-display text-[7rem] font-extrabold leading-none text-ink-50 transition-colors duration-500 group-hover:text-brand-50">
                     {i + 1}
                   </span>
-                  <span className="bg-brand-gradient relative grid size-14 place-items-center rounded-2xl text-white shadow-[0_12px_30px_-10px_rgba(0,179,204,0.7)]">
-                    <Icon className="size-6" />
-                  </span>
+                  <Icon3D icon={Icon} />
                   <h3 className="relative mt-6 text-xl font-semibold">{title}</h3>
                   <p className="relative mt-3 text-sm leading-relaxed text-ink-500 sm:text-base">{text}</p>
                 </div>
+                </TiltCard>
               </Reveal>
             ))}
           </ul>

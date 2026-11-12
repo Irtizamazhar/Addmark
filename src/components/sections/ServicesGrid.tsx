@@ -5,11 +5,13 @@ import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
 import { serviceIcons } from "../ui/icons";
 import { ButtonLink } from "../ui/Button";
+import TiltCard from "../ui/TiltCard";
+import Icon3D from "../ui/Icon3D";
 
 export default function ServicesGrid() {
   return (
     <section className="relative overflow-hidden bg-ink-50 section-y">
-      <div aria-hidden className="absolute -right-40 top-20 size-[30rem] rounded-full bg-brand-200/40 blur-3xl" />
+      <div aria-hidden className="animate-aurora-slow absolute -right-40 top-20 size-[30rem] rounded-full bg-brand-200/40 blur-3xl" />
       <div className="container-x relative">
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
@@ -27,18 +29,17 @@ export default function ServicesGrid() {
             const Icon = serviceIcons[s.icon];
             return (
               <Reveal as="li" key={s.id} delay={(i % 4) * 0.08}>
+                <TiltCard>
                 <Link
                   href={`/services#${s.id}`}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink-100 bg-white p-6 transition-all sm:p-7 duration-500 hover:-translate-y-1.5 hover:border-transparent hover:shadow-[0_30px_60px_-25px_rgba(1,97,121,0.45)]"
+                  className="spotlight group relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink-100 bg-white p-6 transition-all sm:p-7 duration-500 hover:-translate-y-1.5 hover:border-transparent hover:shadow-[0_30px_60px_-25px_rgba(1,97,121,0.45)]"
                 >
                   {/* hover fill */}
                   <span aria-hidden className="absolute inset-0 origin-bottom scale-y-0 bg-ink-900 transition-transform duration-500 ease-out group-hover:scale-y-100" />
                   <span aria-hidden className="absolute -right-10 -top-10 size-32 rounded-full bg-brand-500/0 blur-2xl transition-colors duration-500 group-hover:bg-brand-500/40" />
 
                   <span className="relative flex items-start justify-between">
-                    <span className="grid size-13 place-items-center rounded-2xl bg-brand-50 text-brand-600 transition-colors duration-500 group-hover:bg-brand-500 group-hover:text-white">
-                      <Icon className="size-6" />
-                    </span>
+                    <Icon3D icon={Icon} />
                     <span className="font-display text-sm font-semibold text-ink-200 transition-colors group-hover:text-white/30">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -52,6 +53,7 @@ export default function ServicesGrid() {
                     <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </span>
                 </Link>
+                </TiltCard>
               </Reveal>
             );
           })}

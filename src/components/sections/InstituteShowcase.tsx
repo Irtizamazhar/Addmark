@@ -16,7 +16,8 @@ export default function InstituteShowcase({ showButton = true }: { showButton?: 
   return (
     <section className="relative isolate overflow-hidden bg-ink-950 section-y text-white">
       <div aria-hidden className="bg-grid mask-radial absolute inset-0 -z-10" />
-      <div aria-hidden className="absolute -left-40 top-1/3 -z-10 size-[34rem] rounded-full bg-brand-600/25 blur-[120px]" />
+      <div aria-hidden className="animate-aurora absolute -left-40 top-1/3 -z-10 size-[34rem] rounded-full bg-brand-600/25 blur-[120px]" />
+      <div aria-hidden className="animate-aurora-slow absolute -right-40 bottom-0 -z-10 size-[26rem] rounded-full bg-brand-400/10 blur-[120px]" />
 
       <div className="container-x">
         <div className="grid items-end gap-6 lg:grid-cols-2">
@@ -51,8 +52,8 @@ export default function InstituteShowcase({ showButton = true }: { showButton?: 
 
         <ul className="mt-10 grid gap-px lg:mt-12 overflow-hidden rounded-3xl border border-white/8 bg-white/8 sm:grid-cols-2 lg:grid-cols-4">
           {features.map(({ icon: Icon, title, text }, i) => (
-            <Reveal as="li" key={title} delay={i * 0.08} className="group bg-ink-950 p-6 transition-colors sm:p-7 duration-500 hover:bg-ink-900">
-              <Icon className="size-7 text-brand-400 transition-transform duration-500 group-hover:-translate-y-1" />
+            <Reveal as="li" key={title} delay={i * 0.08} className="spotlight group bg-ink-950 p-6 transition-colors sm:p-7 duration-500 hover:bg-ink-900">
+              <Icon className="size-7 text-brand-400 transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
               <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink-300">{text}</p>
             </Reveal>
@@ -65,11 +66,11 @@ export default function InstituteShowcase({ showButton = true }: { showButton?: 
 
 function Tile({ src, alt, label, tall }: { src: string; alt: string; label: string; tall?: boolean }) {
   return (
-    <figure className={`group relative h-full overflow-hidden rounded-3xl ${tall ? "aspect-[4/3] lg:aspect-auto lg:min-h-[30rem]" : "aspect-[16/10] lg:aspect-auto lg:min-h-[14.5rem]"}`}>
+    <figure className={`group relative h-full overflow-hidden rounded-3xl ring-1 ring-white/10 transition-shadow duration-500 hover:shadow-[0_30px_70px_-30px_rgba(0,179,204,0.55)] ${tall ? "aspect-[4/3] lg:aspect-auto lg:min-h-[30rem]" : "aspect-[16/10] lg:aspect-auto lg:min-h-[14.5rem]"}`}>
       <Image src={src} alt={alt} fill sizes="(min-width:1024px) 40vw, (min-width:640px) 50vw, 100vw" className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink-950/85 via-ink-950/10 to-transparent" />
       <figcaption className="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-ink-950/50 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
-        <span className="size-1.5 rounded-full bg-brand-400" /> {label}
+        <span className="relative grid size-1.5 place-items-center"><span className="absolute inset-0 animate-ping rounded-full bg-brand-400" /><span className="relative size-1.5 rounded-full bg-brand-400" /></span> {label}
       </figcaption>
     </figure>
   );

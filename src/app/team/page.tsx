@@ -4,6 +4,7 @@ import PageHero from "@/components/PageHero";
 import CtaBand from "@/components/sections/CtaBand";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
+import TiltCard from "@/components/ui/TiltCard";
 import { site, team, type TeamMember } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -68,7 +69,8 @@ export default function TeamPage() {
 
 function MemberCard({ member }: { member: TeamMember }) {
   return (
-    <figure className="group h-full overflow-hidden rounded-3xl border border-ink-100 bg-white shadow-[0_10px_40px_-25px_rgba(10,18,24,0.35)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-25px_rgba(1,97,121,0.4)]">
+    <TiltCard>
+    <figure className="spotlight group h-full overflow-hidden rounded-3xl border border-ink-100 bg-white shadow-[0_10px_40px_-25px_rgba(10,18,24,0.35)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-25px_rgba(1,97,121,0.4)]">
       <div className="relative aspect-[4/5] overflow-hidden bg-ink-100">
         <Image
           src={member.image}
@@ -84,5 +86,6 @@ function MemberCard({ member }: { member: TeamMember }) {
         <p className="mt-1 break-words text-xs text-brand-700 sm:text-sm">{member.role}</p>
       </figcaption>
     </figure>
+    </TiltCard>
   );
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Swoosh from "./ui/Swoosh";
+import SceneBackdrop from "./three/SceneBackdrop";
 
 type Props = {
   eyebrow: string;
@@ -27,15 +28,17 @@ export default function PageHero({ eyebrow, title, description, image, imageAlt,
         transition={{ duration: 1.6, ease }}
         className="absolute inset-0 -z-20"
       >
-        <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="object-cover opacity-35" />
+        <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="animate-kenburns object-cover opacity-35" />
       </motion.div>
       <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950 via-ink-950/85 to-ink-950/40" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-ink-950 to-transparent" />
       <div aria-hidden className="bg-grid mask-radial absolute inset-0 -z-10 opacity-60" />
+      <SceneBackdrop className="absolute inset-x-0 bottom-0 -z-10 h-[75%] opacity-55" />
       {/* Anchored to the content container so the decoration stays near the text on wide screens */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="container-x relative h-full">
-          <div className="absolute -right-40 top-0 size-[28rem] rounded-full bg-brand-500/25 blur-[110px]" />
+          <div className="animate-aurora absolute -right-40 top-0 size-[28rem] rounded-full bg-brand-500/25 blur-[110px]" />
+          <div className="animate-aurora-slow absolute -left-48 bottom-0 size-[22rem] rounded-full bg-brand-700/25 blur-[110px]" />
           <Swoosh className="absolute -right-[4%] bottom-0 hidden w-[45%] max-w-2xl opacity-50 md:block" delay={0.6} />
         </div>
       </div>

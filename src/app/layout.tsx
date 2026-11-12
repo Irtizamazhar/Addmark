@@ -4,6 +4,8 @@ import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import PointerGlow from "@/components/ui/PointerGlow";
 import { site } from "@/content/site";
 import "./globals.css";
 
@@ -40,6 +42,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             Skip to content
           </a>
+          <ScrollProgress />
+          <PointerGlow />
           <Navbar />
           <main id="main">{children}</main>
           <Footer />

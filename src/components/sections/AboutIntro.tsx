@@ -36,13 +36,13 @@ export default function AboutIntro({ showButton = true }: { showButton?: boolean
             </div>
             <div className="col-span-5">
               <div className="bg-brand-gradient relative overflow-hidden rounded-[1.5rem] p-4 text-white sm:p-6">
-                <div aria-hidden className="absolute -right-6 -top-6 size-24 rounded-full bg-white/15" />
+                <div aria-hidden className="animate-float absolute -right-6 -top-6 size-24 rounded-full bg-white/15" />
                 <p className="font-display text-sm font-bold leading-snug sm:text-xl">One brand.<br />Two strengths.</p>
                 <p className="mt-2 hidden text-xs text-white/80 sm:block sm:text-sm">Agency expertise, shared through education.</p>
               </div>
             </div>
           </div>
-          <div aria-hidden className="absolute -bottom-6 -left-6 -z-10 size-40 rounded-full bg-brand-200/50 blur-2xl" />
+          <div aria-hidden className="animate-aurora absolute -bottom-6 -left-6 -z-10 size-40 rounded-full bg-brand-200/50 blur-2xl" />
         </Reveal>
 
         {/* Copy */}
@@ -92,8 +92,8 @@ export default function AboutIntro({ showButton = true }: { showButton?: boolean
 
 function Card({ icon, title, children }: { icon: React.ReactNode; title: string; children: React.ReactNode }) {
   return (
-    <div className="h-full rounded-2xl border border-ink-100 bg-white p-5 shadow-[0_10px_30px_-20px_rgba(10,18,24,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-200">
-      <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-600">{icon}</span>
+    <div className="spotlight group h-full rounded-2xl border border-ink-100 bg-white p-5 shadow-[0_10px_30px_-20px_rgba(10,18,24,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-200">
+      <span className="grid size-11 place-items-center rounded-xl bg-brand-50 text-brand-600 transition-all duration-500 group-hover:-rotate-6 group-hover:bg-brand-500 group-hover:text-white">{icon}</span>
       <h3 className="mt-4 text-lg font-semibold">{title}</h3>
       <p className="mt-1.5 text-sm leading-relaxed text-ink-500">{children}</p>
     </div>

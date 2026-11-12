@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Reveal from "../ui/Reveal";
+import Swoosh from "../ui/Swoosh";
+import SceneBackdrop from "../three/SceneBackdrop";
 import { ButtonLink } from "../ui/Button";
 
 type Props = {
@@ -18,14 +20,13 @@ export default function CtaBand({
     <section className={`relative section-y-sm ${flush ? "pt-0!" : ""}`}>
       <div className="container-x">
         <Reveal>
-          <div className="relative isolate overflow-hidden rounded-[2rem] bg-ink-900 px-6 py-12 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
+          <div className="glass-frame relative isolate overflow-hidden rounded-[2rem] bg-ink-900 px-6 py-12 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
             <Image src="/images/inst-lab.webp" alt="" fill sizes="(min-width:1280px) 1200px, 100vw" className="-z-20 object-cover opacity-25" />
             <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950 via-ink-950/90 to-brand-700/70" />
-            <div aria-hidden className="absolute -right-24 -top-24 -z-10 size-80 rounded-full bg-brand-500/30 blur-3xl" />
-            <svg aria-hidden viewBox="0 0 400 200" className="absolute -bottom-6 right-0 -z-10 w-[28rem] max-w-[70%] text-brand-400/25" fill="none">
-              <path d="M0 190 C 140 180, 250 140, 350 40" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
-              <path d="M310 40 L 380 10 L 360 85" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <div aria-hidden className="animate-aurora absolute -right-24 -top-24 -z-10 size-80 rounded-full bg-brand-500/30 blur-3xl" />
+            <div aria-hidden className="animate-aurora-slow absolute -bottom-32 left-1/4 -z-10 size-72 rounded-full bg-brand-600/20 blur-3xl" />
+            <SceneBackdrop className="absolute inset-0 -z-10 opacity-60" />
+            <Swoosh className="absolute -bottom-4 right-0 -z-10 w-[30rem] max-w-[70%] opacity-30" delay={0.3} />
 
             <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
               <div className="max-w-2xl">
