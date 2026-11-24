@@ -62,13 +62,10 @@ export const galleryPhotos: GalleryPhoto[] = [
   { category: "office", src: "/images/contact-office.webp", width: 1600, height: 1068, caption: "Bright workspace", alt: "Modern, bright office interior" },
 
   /* ── Institute ── */
-  { category: "institute", src: "/images/inst-class.webp", width: 1600, height: 1067, caption: "Classroom sessions", alt: "Students attending a lecture in a modern classroom" },
-  { category: "institute", src: "/images/inst-mentor.webp", width: 1600, height: 1200, caption: "One-to-one guidance", alt: "Instructor guiding a group of students around a laptop" },
-  { category: "institute", src: "/images/inst-lab.webp", width: 1600, height: 1067, caption: "Hands-on labs", alt: "Students working together at computers" },
-  { category: "institute", src: "/images/inst-group.webp", width: 1600, height: 1067, caption: "Group projects", alt: "Students discussing ideas around a table" },
-  { category: "institute", src: "/images/inst-students.webp", width: 1600, height: 1067, caption: "Peer learning", alt: "Students working together" },
-  { category: "institute", src: "/images/cta-learning.webp", width: 1600, height: 1067, caption: "Learning together", alt: "Overhead view of students working on laptops around a shared table" },
-  { category: "institute", src: "/images/courses/computer-online-class.webp", width: 1200, height: 800, caption: "Online classes", alt: "Laptop on a table showing “Join us online” on screen" },
+  { category: "institute", src: "/gallery/institute-building.webp", width: 1360, height: 1020, caption: "Our institute building", alt: "Exterior of the institute building at sunset, with the ADDMARK Courses & Training banner on the first floor shown in a close-up circle" },
+  { category: "institute", src: "/gallery/institute-digital-marketing-class.webp", width: 1360, height: 1020, caption: "Digital marketing class", alt: "Instructor teaching a digital marketing lesson at a whiteboard to a full classroom, with SEO, social media and ads topics on the screen" },
+  { category: "institute", src: "/gallery/institute-computer-lab.webp", width: 1360, height: 1020, caption: "Computer lab", alt: "Students working on laptops at desks around the institute's computer lab" },
+  { category: "institute", src: "/gallery/institute-admissions-desk.webp", width: 1360, height: 1020, caption: "Admissions desk", alt: "Students meeting a counsellor at the admissions desk, with ADDMARK “Admission Open” course posters on the walls" },
 
   /* ── Digital Work ── */
   { category: "work", src: "/images/courses/ux-app-screens.webp", width: 1200, height: 817, caption: "App UI design", alt: "Desktop monitor showing mobile app screen designs" },

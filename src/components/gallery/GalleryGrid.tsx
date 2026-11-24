@@ -55,6 +55,22 @@ function interleave(items: GalleryItem[]) {
   return out;
 }
 
+/** Written out in full so Tailwind generates them. The index is the column count. */
+const columnClass = {
+  base: ["", "columns-1", "columns-2"],
+  lg: ["", "lg:columns-1", "lg:columns-2", "lg:columns-3"],
+  xl: ["", "xl:columns-1", "xl:columns-2", "xl:columns-3", "xl:columns-4"],
+} as const;
+
+/**
+ * The most columns (up to `max`) that `n` similar-height tiles fill without leaving one empty.
+ * CSS columns balance by height, so e.g. 4 tiles in 3 columns land as 2 + 2 + nothing.
+ */
+function fillableColumns(n: number, max: number) {
+  for (let c = Math.min(max, n); c > 1; c--) if (Math.ceil(n / Math.ceil(n / c)) === c) return c;
+  return 1;
+}
+
 const formatDuration = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;
 const plural = (n: number, word: string) => `${word}${n === 1 ? "" : "s"}`;
 
@@ -76,6 +92,12 @@ export default function GalleryGrid() {
   const nVideos = items.length - nPhotos;
   // Same-shaped tiles (a videos-only view) sit in an even grid; mixed shapes use a masonry of columns.
   const uniform = nPhotos === 0;
+  // Up to 2 / 3 / 4 columns (phone / laptop / large screen), but never more than the items can fill.
+  const n = items.length;
+  const masonryColumns =
+    n === 1
+      ? "mx-auto max-w-3xl columns-1"
+      : `${columnClass.base[fillableColumns(n, 2)]} ${columnClass.lg[fillableColumns(n, 3)]} ${columnClass.xl[fillableColumns(n, 4)]}`;
 
   const close = () => {
     const i = openIndex;
@@ -122,7 +144,7 @@ export default function GalleryGrid() {
         {/* Keyed by filter so the tiles animate in again when the collection changes. */}
         <ul
           key={filter}
-          className={`mt-8 gap-3 sm:gap-4 lg:mt-10 ${uniform ? "flex flex-wrap justify-center" : "columns-2 lg:columns-3 xl:columns-4"}`}
+          className={`mt-8 gap-3 sm:gap-4 lg:mt-10 ${uniform ? "flex flex-wrap justify-center" : masonryColumns}`}
         >
           {items.map((item, i) => (
             <li
