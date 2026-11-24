@@ -5,6 +5,10 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  experimental: {
+    // Warn in dev/build when the installed Next.js has a known security advisory.
+    agentUpgrade: "security",
+  },
   // Course URLs from the first version of the site → their new catalog pages
   async redirects() {
     return [
