@@ -190,7 +190,7 @@ export type TeamMember = {
 };
 
 export const team: TeamMember[] = [
-  { name: "[Team Member Name]", role: "[Founder / CEO]", group: "company", image: "/team/member-1.webp" },
+  { name: "Irtiza Mazhar", role: "Full Stack Developer", group: "company", image: "/team/irtiza-mazhar.webp" },
   { name: "[Team Member Name]", role: "[Web Developer]", group: "company", image: "/team/member-2.webp" },
   { name: "[Team Member Name]", role: "[Digital Marketing Specialist]", group: "company", image: "/team/member-3.webp" },
   { name: "[Team Member Name]", role: "[Graphic Designer]", group: "company", image: "/team/member-4.webp" },
