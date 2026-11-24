@@ -57,7 +57,7 @@ export const navLinks = [
   { label: "Institute", href: "/institute" },
   { label: "Courses", href: "/courses" },
   { label: "Team", href: "/team" },
-  { label: "Gallery", href: "/gallery" },
+  { label: "Portfolio", href: "/gallery" },
   { label: "Contact Us", href: "/contact" },
 ];
 

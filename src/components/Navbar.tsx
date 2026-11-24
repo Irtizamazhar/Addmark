@@ -52,7 +52,7 @@ export default function Navbar() {
             </span>
           </div>
 
-          <ul className="hidden items-center gap-1 lg:flex">
+          <ul className="hidden items-center gap-0.5 lg:flex xl:gap-1">
             {navLinks.map((l) => {
               const active = isActive(l.href);
               return (
@@ -60,7 +60,8 @@ export default function Navbar() {
                   <Link
                     href={l.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative z-10 block rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                    // Tighter padding on small laptops so all links fit on one line next to the logo and button.
+                    className={`relative z-10 block whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition-colors xl:px-4 ${
                       solid
                         ? active ? "text-brand-700" : "text-ink-600 hover:text-ink-900"
                         : active ? "text-white" : "text-white/70 hover:text-white"

@@ -7,7 +7,7 @@ import { site } from "@/content/site";
 import { galleryCategories, galleryItems, galleryPhotos, galleryVideos } from "@/content/gallery";
 
 export const metadata: Metadata = {
-  title: "Gallery",
+  title: "Portfolio",
   description: `Photos and videos from ${site.name}: our office and team, ${site.instituteName} classes and labs, and the digital work and video content we create.`,
 };
 
@@ -22,12 +22,12 @@ export default function GalleryPage() {
   return (
     <>
       <PageHero
-        eyebrow="Gallery"
+        eyebrow="Portfolio"
         title={<>A look inside <span className="text-gradient">{site.name}</span></>}
         description="Our office and team, our classrooms and labs, and the digital work and videos we create, all in one place."
         image="/images/hero-team.webp"
         imageAlt="Team working on laptops around a shared wooden table"
-        crumbs={[{ label: "Gallery" }]}
+        crumbs={[{ label: "Portfolio" }]}
       >
         <ul className="flex flex-wrap gap-3 text-sm text-ink-200">
           {stats.map(({ icon: Icon, label }) => (
